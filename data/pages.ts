@@ -789,6 +789,140 @@ export const PAGES: Page[] = [
     ],
   },
   {
+    slug: "australian-citizens-and-residents",
+    nav: "Australians",
+    title: "Australian citizens do not need an NZeTA. Permanent residents do.",
+    description:
+      "Australian citizens travel to New Zealand without a visa or an NZeTA. Australian permanent residents are not in the same position and must hold an NZeTA before they board.",
+    blocks: [
+      {
+        p: `This is the single most common mix-up on this topic, and it is worth getting right before you book. Australian citizenship and Australian permanent residence are treated differently by New Zealand.`,
+      },
+      { h2: "If you are an Australian citizen" },
+      {
+        p: `You do not need a visa and you do not need an NZeTA. Immigration New Zealand lists Australian citizens among the travellers who need neither. You still travel on your Australian passport and you still complete the traveller declaration like everyone else.`,
+      },
+      { h2: "If you are an Australian permanent resident" },
+      {
+        p: `You need an NZeTA. Permanent residence in Australia does not carry the same entry right as citizenship, and airlines check for the authority before they let you board. Apply before you travel, not at the airport.`,
+      },
+      { note: `Holding an Australian visa is not the same as holding Australian permanent residence. If you are unsure which you hold, check the grant letter from the Department of Home Affairs before you rely on it.` },
+      { h2: "Travelling on to Australia afterwards" },
+      {
+        p: `If you pass through New Zealand on your way to or from Australia, you need a current visa from the Australian government to enter Australia. New Zealand does not issue that, and an NZeTA does not stand in for it.`,
+      },
+      {
+        source: {
+          label: "Immigration New Zealand — New Zealand Electronic Travel Authority (NZeTA)",
+          url: "https://www.immigration.govt.nz/new-zealand-visas/visas/visa/nzeta",
+        },
+      },
+    ],
+  },
+  {
+    slug: "work-and-study",
+    nav: "Work and study",
+    title: `Can you work or study on an NZeTA? Study up to ${F.studyMonthsInTwelveMonths} months, no work.`,
+    description:
+      `Arriving under the visa waiver lets you study for up to ${F.studyMonthsInTwelveMonths} months. It does not let you work. What counts as work is wider than most travellers expect.`,
+    blocks: [
+      {
+        p: `An NZeTA lets you enter as a visitor. The conditions that come with a visitor stay are what decide whether you may work or study, and those conditions are narrow.`,
+      },
+      { h2: "You cannot work" },
+      {
+        p: `Immigration New Zealand states it plainly for visitors: you cannot work. This holds even if the work is short, unpaid, or for an employer outside New Zealand paying you overseas. If earning is part of why you are going, you need a work visa, not an NZeTA.`,
+      },
+      { h2: `You can study for up to ${F.studyMonthsInTwelveMonths} months` },
+      {
+        p: `Short courses are allowed. The limit is ${F.studyMonthsInTwelveMonths} months of study in a 12-month period. A longer course needs a student visa, and enrolling first does not change that.`,
+      },
+      { h2: "Where travellers get caught out" },
+      {
+        ul: [
+          "Attending a conference is usually fine; being paid to speak at it is not.",
+          "Volunteering can still count as work if it displaces a paid role.",
+          "Remote work for an overseas employer is not automatically safe — check before you assume.",
+        ],
+      },
+      { note: `If you are unsure whether what you plan to do counts as work, ask Immigration New Zealand before you travel. Being turned around at the border costs far more than the question.` },
+      {
+        source: {
+          label: "Immigration New Zealand — Visitor Visa",
+          url: "https://www.immigration.govt.nz/new-zealand-visas/visas/visa/visitor-visa",
+        },
+      },
+    ],
+  },
+  {
+    slug: "medical-treatment",
+    nav: "Medical treatment",
+    title: "Travelling to New Zealand for medical treatment? An NZeTA is not enough.",
+    description:
+      "If the purpose of the trip is medical treatment, Immigration New Zealand requires a Medical Treatment Visitor Visa. The NZeTA does not cover it.",
+    blocks: [
+      {
+        p: `An NZeTA covers ordinary visits — tourism, family, business meetings. Travelling specifically to receive medical treatment is treated separately.`,
+      },
+      { h2: "What is required instead" },
+      {
+        p: `Immigration New Zealand directs travellers coming for medical treatment to apply for a Medical Treatment Visitor Visa. That is a visa application with its own requirements, not something the NZeTA can be used for.`,
+      },
+      { h2: "Falling ill while you are already there" },
+      {
+        p: `This is a different situation. Being treated for something that happens during your visit is not the same as travelling in order to be treated. If you then need to stay longer than your visit allows, that is a question about extending your stay, and you should raise it before your current stay runs out.`,
+      },
+      { note: `New Zealand's public health system does not cover most visitors. Travel insurance that includes medical cover is worth arranging before you go, whatever the purpose of your trip.` },
+      {
+        source: {
+          label: "Immigration New Zealand — New Zealand Electronic Travel Authority (NZeTA)",
+          url: "https://www.immigration.govt.nz/new-zealand-visas/visas/visa/nzeta",
+        },
+      },
+    ],
+  },
+  {
+    slug: "nzeta-or-visitor-visa",
+    nav: "NZeTA or visa?",
+    title: "NZeTA or Visitor Visa: which one do you actually need?",
+    description:
+      `The NZeTA covers short visits from visa-waiver passports. Longer stays, work, study beyond ${F.studyMonthsInTwelveMonths} months and medical treatment need a visa instead.`,
+    blocks: [
+      {
+        p: `Most travellers only need to answer one question: does my passport qualify for the visa waiver, and does my trip fit inside what a visitor stay allows? If both are yes, the NZeTA is the right route.`,
+      },
+      { h2: "An NZeTA is enough when" },
+      {
+        ul: [
+          `You hold a passport from a visa-waiver country or territory.`,
+          `You are visiting for up to ${F.stayMonths} months at a time (up to ${F.stayUkMonths} months for United Kingdom passport holders).`,
+          `You will not work, and any study is within ${F.studyMonthsInTwelveMonths} months.`,
+        ],
+      },
+      { h2: "You need a Visitor Visa instead when" },
+      {
+        ul: [
+          `Your passport is not on the visa-waiver list.`,
+          `You want to stay longer than the visa waiver allows.`,
+          `You have already used up ${F.stayMaxInTwelveMonths} months in the last 12 months.`,
+          `You are travelling for medical treatment.`,
+          `You are transiting through an airport other than Auckland.`,
+        ],
+      },
+      { h2: "The cost difference is large" },
+      {
+        p: `An NZeTA costs ${F.feeApp} through the official app plus the ${F.ivl} levy, so ${F.totalApp} in total. A Visitor Visa starts well above that and takes longer to decide. That is a reason to check which one applies before you pay for anything.`,
+      },
+      { note: `Immigration New Zealand publishes a checker tool that answers this for your exact passport and trip. Use it rather than guessing from a summary, including this one.` },
+      {
+        source: {
+          label: "Immigration New Zealand — Check if you need a visa or an NZeTA",
+          url: "https://www.immigration.govt.nz/new-zealand-visas/visas/visa/nzeta",
+        },
+      },
+    ],
+  },
+  {
     slug: "about",
     nav: "About this guide",
     title: "About this guide",
