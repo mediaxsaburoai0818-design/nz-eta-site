@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { SITE } from "@/data/facts";
+import { LANG_CODES, LANG_PAGE_PARAMS } from "@/data/langs";
 import { PAGE_SLUGS } from "@/data/pages";
 
 /** ⚠️ output:"export" では必須。無いと「dynamic not configured」でビルドが落ちる。 */
@@ -19,6 +20,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: d,
       changeFrequency: "monthly" as const,
       priority: 0.7,
+    })),
+    // 言語ディレクトリ（/de/ /ko/）。LANGSに足せば自動で増える。
+    ...LANG_CODES.map((c) => ({
+      url: `${SITE}/${c}/`,
+      lastModified: d,
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
+    })),
+    ...LANG_PAGE_PARAMS.map(({ lang, slug }) => ({
+      url: `${SITE}/${lang}/${slug}/`,
+      lastModified: d,
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
     })),
   ];
 }

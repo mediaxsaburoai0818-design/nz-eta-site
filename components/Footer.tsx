@@ -1,4 +1,5 @@
 import { FACTS as F } from "@/data/facts";
+import LangSwitcher from "./LangSwitcher";
 
 /** フッター。⚠️ 公式ではないことの明示は必須（誤認を避ける）。 */
 export default function Footer() {
@@ -11,6 +12,7 @@ export default function Footer() {
           Immigration New Zealand, and we do not submit applications. Always apply through the
           official app or website. Figures checked {F.updated}.
         </p>
+        <LangSwitcher />
       </div>
     </footer>
   );

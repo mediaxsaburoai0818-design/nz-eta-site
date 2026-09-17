@@ -4,6 +4,7 @@ import Reveal from "@/components/Reveal";
 import StickyCta from "@/components/StickyCta";
 import Link from "next/link";
 import { FACTS as F, SITE } from "@/data/facts";
+import { LANGS, LANG_CODES } from "@/data/langs";
 import { PAGES } from "@/data/pages";
 
 /*
@@ -27,7 +28,10 @@ export const metadata: Metadata = {
   },
   description:
     `A plain-English guide to the New Zealand eTA (NZeTA): the request fee is ${F.feeApp} in the app or ${F.feeWeb} online, plus the ${F.ivl} IVL — about ${F.totalApp}–${F.totalWeb} in total. Valid ${F.validYears} years, up to ${F.stayDays} days per visit.`,
-  alternates: { canonical: `${SITE}/` },
+  alternates: {
+    canonical: `${SITE}/`,
+    languages: { en: `${SITE}/`, ...Object.fromEntries(LANG_CODES.map((c) => [LANGS[c].htmlLang, `${SITE}/${c}/`])) },
+  },
   openGraph: {
     title: `NZeTA: ${F.totalApp} all in, valid ${F.validYears} years`,
     description: `What the New Zealand eTA actually costs once the ${F.ivl} IVL is included, and how to apply on the official Immigration New Zealand channels.`,

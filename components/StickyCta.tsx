@@ -9,8 +9,18 @@ import { FACTS as F } from '@/data/facts'
  * ・ヒーローを通り過ぎたら出す。ページ最下部のCTAに重なる区間では引っ込める
  *   （同じボタンが二重に見えるのを避ける）
  * ⚠️ scroll ハンドラは requestAnimationFrame でまとめる（毎フレーム再計算しない）
+ * ⚠️ 言語ディレクトリ（/de/ /ko/）から使うときは文言を渡す。
+ *    既定は英語のままにして、英語ページの表示は変えない。
  */
-export default function StickyCta() {
+export default function StickyCta({
+  title,
+  sub,
+  button,
+}: {
+  title?: string
+  sub?: string
+  button?: string
+} = {}) {
   const [shown, setShown] = useState(false)
 
   useEffect(() => {
@@ -38,8 +48,8 @@ export default function StickyCta() {
     <div className={`cta-sticky-bar${shown ? ' is-shown' : ''}`} aria-hidden={!shown}>
       <div className="cta-sticky-inner">
         <div>
-          <p className="cta-sticky-title">Apply for your NZeTA — {F.totalApp} including the IVL</p>
-          <p className="cta-sticky-sub">Official Immigration New Zealand app &amp; website · independent guide</p>
+          <p className="cta-sticky-title">{title ?? `Apply for your NZeTA — ${F.totalApp} including the IVL`}</p>
+          <p className="cta-sticky-sub">{sub ?? "Official Immigration New Zealand app & website · independent guide"}</p>
         </div>
         <a
           href={F.officialUrl}
@@ -48,7 +58,7 @@ export default function StickyCta() {
           className="cta-sticky-btn"
           tabIndex={shown ? 0 : -1}
         >
-          Apply now
+          {button ?? 'Apply now'}
         </a>
       </div>
     </div>
