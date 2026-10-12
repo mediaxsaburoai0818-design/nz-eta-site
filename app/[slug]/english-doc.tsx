@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
 import StickyCta from "@/components/StickyCta";
-import { FACTS as F, SITE } from "@/data/facts";
+import { FACTS as F, OG_IMAGES, SITE } from "@/data/facts";
 import { LANGS, LANG_CODES } from "@/data/langs";
-import { PAGES } from "@/data/pages";
+import DocFaq from "@/components/DocFaq";
+import { PAGES, pickRelated } from "@/data/pages";
 
 /*
   英語の下層ページ本体。[slug] は言語ディレクトリ（/de/ /ko/）と同じ階層を共有するため、
@@ -38,14 +39,14 @@ export function enDocMetadata(slug: string): Metadata {
         ),
       },
     },
-    openGraph: { title: doc.title, description: doc.description, locale: "en", type: "article" },
+    openGraph: { title: doc.title, description: doc.description, locale: "en", type: "article", images: OG_IMAGES },
   };
 }
 
 export default function EnglishDoc({ slug }: { slug: string }) {
   const doc = find(slug);
   if (!doc) return null;
-  const others = PAGES.filter((p) => p.slug !== slug && !["privacy", "terms", "about"].includes(p.slug)).slice(0, 6);
+  const others = pickRelated(PAGES.filter((p) => !["privacy", "terms", "about"].includes(p.slug)), slug, doc.related);
 
   const ld = {
     "@context": "https://schema.org",
@@ -105,6 +106,8 @@ export default function EnglishDoc({ slug }: { slug: string }) {
             </div>
           );
         })}
+
+        <DocFaq items={doc.faq} heading="Common questions" />
 
         <div className="mt-12 reveal">
           <a href={F.officialUrl} target="_blank" rel="noopener noreferrer" className="cta-button-red">

@@ -24,7 +24,25 @@ export type Page = {
   nav: string;
   description: string;
   blocks: Block[];
+  /** 本文下の関連カードに優先して出すスラッグ。足りない分は一覧の前後で埋める（全ページに被リンクが回るように） */
+  related?: string[];
+  /** よくある質問。本文の後に表示し、FAQPage 構造化データも出す */
+  faq?: Faq[];
 };
+
+export type Faq = { q: string; a: string };
+
+/**
+ * 関連カードの選び方（英語・各言語で共通）。
+ * ⚠️ 以前は全ページが「一覧の先頭6本」を出していたため、後ろのページはトップからしか張られていなかった。
+ *    明示した related → 一覧で自分の次から順に、で6本にする。
+ */
+export function pickRelated<T extends { slug: string }>(all: T[], self: string, related: string[] = [], n = 6): T[] {
+  const i = all.findIndex((p) => p.slug === self);
+  const ring = i < 0 ? all : [...all.slice(i + 1), ...all.slice(0, i)];
+  const first = related.map((s) => all.find((p) => p.slug === s)).filter((p): p is T => !!p && p.slug !== self);
+  return [...first, ...ring.filter((p) => p.slug !== self && !first.includes(p))].slice(0, n);
+}
 
 export const PAGES: Page[] = [
   {
@@ -68,7 +86,7 @@ export const PAGES: Page[] = [
     nav: "How to apply",
     title: "How to apply for an NZeTA, step by step",
     description:
-      `Applying takes about ten minutes in the official app (${F.feeApp}) or on the Immigration New Zealand website (${F.feeWeb}). Here is the order of the steps and what trips people up.`,
+      `Applying takes about ten minutes in the official app (${F.feeApp}) or on the Immigration NZ website (${F.feeWeb}). The steps in order, and what trips people up.`,
     blocks: [
       {
         p: `There are exactly two official channels: the NZeTA app and the Immigration New Zealand website. The app costs ${F.feeApp} and the website ${F.feeWeb} — the same authorisation either way.`,
@@ -316,7 +334,7 @@ export const PAGES: Page[] = [
     nav: "6 months in any 12",
     title: "The rule that really limits your stay: 6 months in any 12-month period",
     description:
-      "Three months per visit is not the whole story. Visa-waiver travellers may spend at most six months in New Zealand in any twelve-month period, however many trips that takes.",
+      "Three months per visit is not the whole story: visa-waiver travellers may spend at most six months in any twelve-month period, however many trips that takes.",
     blocks: [
       {
         p: `Most guides stop at "three months per visit". That is correct, but it is not the limit that catches people out. Immigration New Zealand also caps the total: you may only visit New Zealand for up to ${F.stayMaxInTwelveMonths} months in any ${2 * F.stayMaxInTwelveMonths}-month period.`,
@@ -348,7 +366,7 @@ export const PAGES: Page[] = [
     nav: "Leaving and returning",
     title: "Does leaving New Zealand and coming back reset your three months?",
     description:
-      "A short trip to Australia and back does not give you a fresh three months. Here is what actually resets, what does not, and why repeated entries attract questions.",
+      "A short trip to Australia and back does not give you a fresh three months. What resets, what does not, and why repeated entries attract questions.",
     blocks: [
       {
         p: "This is the most common misunderstanding about visa-waiver travel to New Zealand. The short answer is no: hopping over to Australia or the Pacific and returning does not hand you a clean three months.",
@@ -499,7 +517,7 @@ export const PAGES: Page[] = [
     nav: "Biosecurity",
     title: "New Zealand biosecurity: what you must declare, and the fine if you do not",
     description:
-      `Failing to declare risk goods is an instant ${F.biosecurityInstantFine} fine even when it is an honest mistake. Deliberate smuggling carries up to ${F.biosecurityMaxFine} and ${F.biosecurityMaxPrisonYears} years in prison.`,
+      `Undeclared risk goods mean an instant ${F.biosecurityInstantFine} fine, even by honest mistake. Deliberate smuggling: up to ${F.biosecurityMaxFine} and ${F.biosecurityMaxPrisonYears} years in prison.`,
     blocks: [
       {
         p: "New Zealand's economy rests on agriculture and its ecosystems evolved in isolation, so its biosecurity controls are among the strictest anywhere. Travellers who arrive expecting European or North American norms are the ones who get fined.",
@@ -579,7 +597,7 @@ export const PAGES: Page[] = [
     nav: "Bringing medicines",
     title: "Bringing prescription medicines into New Zealand",
     description:
-      `You may bring up to ${F.medsMonthsPrescription} months' supply of prescription medicine, but only ${F.medsMonthsControlled} month if it is a controlled drug. Both need documentation, and both must be declared.`,
+      `You may bring up to ${F.medsMonthsPrescription} months' supply of prescription medicine, or ${F.medsMonthsControlled} month of a controlled drug. Both need paperwork and must be declared.`,
     blocks: [
       {
         p: "New Zealand treats medicine you bring for your own use as an import, and the rules differ depending on what the medicine is. Getting this wrong is one of the few ways an otherwise straightforward arrival turns into a long conversation at the border.",
@@ -723,7 +741,7 @@ export const PAGES: Page[] = [
     nav: "Dual nationals",
     title: "Which passport should a dual national use for the NZeTA?",
     description:
-      "The NZeTA is linked to one passport, and you must travel on that passport. Holding a second nationality is not a problem — presenting the wrong document at check-in is.",
+      "The NZeTA is linked to one passport, and you must travel on it. A second nationality is not a problem — showing the wrong passport at check-in is.",
     blocks: [
       {
         p: "The rule is short: the NZeTA is attached electronically to the passport used in the request, and you must travel on that passport. Everything else follows from that.",
@@ -793,7 +811,7 @@ export const PAGES: Page[] = [
     nav: "Australians",
     title: "Australian citizens do not need an NZeTA. Permanent residents do.",
     description:
-      "Australian citizens travel to New Zealand without a visa or an NZeTA. Australian permanent residents are not in the same position and must hold an NZeTA before they board.",
+      "Australian citizens need neither a visa nor an NZeTA for New Zealand. Australian permanent residents are different: they must hold an NZeTA before boarding.",
     blocks: [
       {
         p: `This is the single most common mix-up on this topic, and it is worth getting right before you book. Australian citizenship and Australian permanent residence are treated differently by New Zealand.`,
@@ -927,7 +945,7 @@ export const PAGES: Page[] = [
     nav: "Which one do I need?",
     title: "Which travel authorisation do you need? NZeTA, eVisitor, K-ETA, ESTA and the others compared",
     description:
-      "They have similar names and very different rules. Which scheme applies to which destination, what each one costs, and the mistakes that come from mixing them up.",
+      "Similar names, very different rules. Which scheme applies to which destination, what each one costs, and the mistakes that come from mixing them up.",
     blocks: [
       {
         p: `Electronic travel authorisations look interchangeable from the outside. They are not. Each country runs its own scheme, with its own eligibility list, its own price, and its own idea of what the document even is — some are visas, some explicitly are not.`,

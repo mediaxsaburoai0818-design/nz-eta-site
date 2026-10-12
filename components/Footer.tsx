@@ -1,4 +1,5 @@
 import { FACTS as F } from "@/data/facts";
+import Link from "next/link";
 import LangSwitcher from "./LangSwitcher";
 
 /** フッター。⚠️ 公式ではないことの明示は必須（誤認を避ける）。 */
@@ -12,6 +13,12 @@ export default function Footer() {
           Immigration New Zealand, and we do not submit applications. Always apply through the
           official app or website. Figures checked {F.updated}.
         </p>
+        {/* 運営者情報・規約は全ページから辿れるようにする（トップからしか張られていなかった） */}
+        <div className="mt-5 flex justify-center gap-x-4 text-xs">
+          <Link href="/about/" style={{ color: "rgba(255,255,255,.85)" }}>About</Link>
+          <Link href="/privacy/" style={{ color: "rgba(255,255,255,.85)" }}>Privacy</Link>
+          <Link href="/terms/" style={{ color: "rgba(255,255,255,.85)" }}>Terms</Link>
+        </div>
         <LangSwitcher />
       </div>
     </footer>

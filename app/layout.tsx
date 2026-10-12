@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Noto_Sans, Noto_Serif } from "next/font/google";
 import "./globals.css";
+import { OG_IMAGES } from "@/data/facts";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
@@ -24,7 +25,7 @@ export const metadata: Metadata = {
     template: "%s | NZeTA Guide",
   },
   description:
-    "An independent, plain-English guide to the New Zealand Electronic Travel Authority (NZeTA): the request fee, the NZ$100 IVL, validity, and how to apply on the official channels.",
+    "An independent, plain-English guide to the NZeTA: the request fee, the NZ$100 IVL, validity, and how to apply on the official channels.",
   keywords:
     "NZeTA, New Zealand eTA, Electronic Travel Authority, IVL, International Visitor Levy, New Zealand travel authorisation",
   robots: { index: true, follow: true },
@@ -44,6 +45,7 @@ export const metadata: Metadata = {
       "The NZeTA request fee is only part of it. The NZ$100 IVL is charged at the same time.",
     locale: "en",
     type: "website",
+    images: OG_IMAGES,
   },
 };
 

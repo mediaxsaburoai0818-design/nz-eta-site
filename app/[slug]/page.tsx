@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
 import StickyCta from "@/components/StickyCta";
-import { FACTS as F, SITE } from "@/data/facts";
+import { FACTS as F, OG_IMAGES, SITE } from "@/data/facts";
 import { LANGS, LANG_CODES } from "@/data/langs";
 import { PAGE_SLUGS } from "@/data/pages";
 import EnglishDoc, { enDocMetadata } from "./english-doc";
@@ -38,7 +38,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     title: { absolute: t.homeTitle },
     description: t.homeDescription,
     alternates: { canonical: `${SITE}/${slug}/`, languages: hreflangs },
-    openGraph: { title: t.homeTitle, description: t.homeDescription, locale: t.htmlLang, type: "website" },
+    openGraph: { title: t.homeTitle, description: t.homeDescription, locale: t.htmlLang, type: "website", images: OG_IMAGES },
   };
 }
 

@@ -36,6 +36,7 @@ export const ko: LangContent = {
     years: "년 유효",
     monthsPerEntry: "개월(1회 입국)",
     decision: "심사 소요(보통)",
+    faq: "자주 묻는 질문",
   },
   pages: [
     {

@@ -68,3 +68,6 @@ export const FACTS = {
 
 /** canonical・OG・sitemap で使う本番URL（2026-08-17 okina取得）。 */
 export const SITE = "https://nzeta-online.com";
+
+/** og:image。⚠️ openGraph をページ側で上書きすると layout の images は引き継がれない（Next.jsは浅いマージ）ので、各 generateMetadata で必ずこれを入れる。 */
+export const OG_IMAGES = [{ url: `${SITE}/images/hero-nz.jpg`, width: 1920, height: 901 }];

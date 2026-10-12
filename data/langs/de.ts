@@ -37,6 +37,7 @@ export const de: LangContent = {
     years: "Jahre gültig",
     monthsPerEntry: "Monate pro Einreise",
     decision: "Entscheidung meist innerhalb",
+    faq: "Häufige Fragen",
   },
   pages: [
     {

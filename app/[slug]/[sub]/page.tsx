@@ -2,8 +2,10 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
 import StickyCta from "@/components/StickyCta";
-import { FACTS as F, SITE } from "@/data/facts";
+import { FACTS as F, OG_IMAGES, SITE } from "@/data/facts";
+import DocFaq from "@/components/DocFaq";
 import { LANGS, LANG_PAGE_PARAMS } from "@/data/langs";
+import { pickRelated } from "@/data/pages";
 
 /*
   言語ディレクトリ配下の記事（/de/kosten/ /ko/cost/ など）。
@@ -39,7 +41,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       // ⚠️ 対応する英語ページ（enSlug）を en として示す。翻訳の対応関係を明示するのが目的。
       languages: { en: `${SITE}/${doc.enSlug}/`, [t.htmlLang]: `${SITE}/${lang}/${sub}/` },
     },
-    openGraph: { title: doc.title, description: doc.description, locale: t.htmlLang, type: "article" },
+    openGraph: { title: doc.title, description: doc.description, locale: t.htmlLang, type: "article", images: OG_IMAGES },
   };
 }
 
@@ -48,7 +50,7 @@ export default async function LangDoc({ params }: { params: Promise<{ slug: stri
   const hit = find(lang, sub);
   if (!hit) return null;
   const { t, doc } = hit;
-  const others = t.pages.filter((p) => p.slug !== sub).slice(0, 6);
+  const others = pickRelated(t.pages, sub, doc.related);
 
   const ld = {
     "@context": "https://schema.org",
@@ -109,6 +111,8 @@ export default async function LangDoc({ params }: { params: Promise<{ slug: stri
             </div>
           );
         })}
+
+        <DocFaq items={doc.faq} heading={t.ui.faq} />
 
         <div className="mt-12 reveal">
           <a href={F.officialUrl} target="_blank" rel="noopener noreferrer" className="cta-button-red">

@@ -1,5 +1,5 @@
 import { FACTS } from "@/data/facts";
-import type { Block } from "@/data/pages";
+import type { Block, Faq } from "@/data/pages";
 
 /**
  * 言語ディレクトリ（/de/ /ko/ …）の中身の型。
@@ -20,6 +20,9 @@ export type LangPage = {
   title: string;
   description: string;
   blocks: Block[];
+  /** 同じ言語ディレクトリ内のスラッグ。関連カードに優先して出す */
+  related?: string[];
+  faq?: Faq[];
 };
 
 export type LangContent = {
@@ -50,6 +53,8 @@ export type LangContent = {
     years: string;
     monthsPerEntry: string;
     decision: string;
+    /** 記事末尾の「よくある質問」見出し */
+    faq: string;
   };
   pages: LangPage[];
 };
