@@ -90,6 +90,17 @@ export default function EnglishDoc({ slug }: { slug: string }) {
                 {b.ul.map((x) => <li key={x}>{x}</li>)}
               </ul>
             );
+          if ("links" in b)
+            return (
+              <div key={i} className="mt-6 grid md:grid-cols-2 gap-4">
+                {b.links.map((l) => (
+                  <Link key={l.href} href={l.href} className="feature-card no-underline reveal">
+                    <h3 className="font-bold" style={{ color: "var(--color-navy)" }}>{l.label}</h3>
+                    {l.text && <p className="mt-2 text-sm leading-relaxed">{l.text}</p>}
+                  </Link>
+                ))}
+              </div>
+            );
           if ("source" in b)
             // 出典リンク。数値を書いたページには必ず一次情報へのリンクを添える（読者が原典を辿れる状態にする）
             return (

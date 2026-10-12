@@ -1,4 +1,5 @@
 import { FACTS as F } from "@/data/facts";
+import { HUB_PAGE, PRACTICAL_PAGES } from "@/data/pages-practical";
 
 /**
  * 英語（ルート）の下層ページ。uketa（eta-se.com）の言語ディレクトリと同じ13本構成に合わせる。
@@ -15,7 +16,9 @@ export type Block =
   | { ul: string[] }
   | { note: string }
   /** 出典リンク。数値・罰則を書いたページには必ず添える（読者が一次情報を辿れるように） */
-  | { source: { label: string; url: string } };
+  | { source: { label: string; url: string } }
+  /** サイト内リンクの一覧（ハブページ用）。href はサイト内パス */
+  | { links: { href: string; label: string; text?: string }[] };
 
 export type Page = {
   slug: string;
@@ -1003,6 +1006,9 @@ export const PAGES: Page[] = [
           },
     ],
   },
+  // 入国後の実用ページ（data/pages-practical.ts）
+  HUB_PAGE,
+  ...PRACTICAL_PAGES,
   {
     slug: "about",
     nav: "About this guide",

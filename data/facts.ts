@@ -58,6 +58,25 @@ export const FACTS = {
   medsMonthsPrescription: 3,
   medsMonthsContraceptive: 6,
   medsMonthsControlled: 1,
+  /* ── 入国後の実用情報（2026-10-12 公式で裏取り。ファクト＝~/projects/nz-entry-facts-2026-10-12.md） ── */
+  /** eGate: 10歳以上・対象59の国と地域（独・韓とも対象）。10歳未満の子連れは係官のレーン */
+  egateMinAge: 10,
+  egateCountries: 59,
+  /** 機内持ち込みの液体（国際線のみ。国内線は制限なし）: 1容器100ml・合計1L・20cm四方の袋。無機粉末は350ml/350g */
+  liquidsContainerMl: 100,
+  liquidsBagLitres: 1,
+  liquidsBagCm: 20,
+  powdersMl: 350,
+  /** GST（消費税）。旅行者への払い戻し制度は無い（Customs明記） */
+  gstRate: "15%",
+  /** 緊急・相談の電話番号 */
+  emergencyNumber: "111",
+  policeNonEmergency: "105",
+  roadIncidentMobile: "*555",
+  healthline: "0800 611 116",
+  /** 電源 */
+  voltage: "230 V",
+  frequency: "50 Hz",
   /** ISOで持つ。⚠️ 画面には英語圏で自然な "17 August 2026" 形式で出す（updatedLabel） */
   updated: "2026-08-17",
   updatedLabel: "17 August 2026",
