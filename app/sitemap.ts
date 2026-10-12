@@ -12,7 +12,7 @@ export const dynamic = "force-static";
  * ⚠️ 下層ページを作ったらここに足す（作っていないURLを載せない）。
  */
 export default function sitemap(): MetadataRoute.Sitemap {
-  const d = new Date("2026-08-19");
+  const d = new Date("2026-10-12");
   return [
     { url: `${SITE}/`, lastModified: d, changeFrequency: "weekly", priority: 1 },
     ...PAGE_SLUGS.map((slug) => ({

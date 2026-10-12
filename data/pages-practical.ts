@@ -15,7 +15,10 @@ import type { Page } from "@/data/pages";
 
 export const HUB_SLUG = "arriving-in-new-zealand";
 
-export const PRACTICAL_PAGES: Page[] = [
+/** 2026-10-12 に公式で確認したページ群（表示の確認日） */
+const CHECKED = "12 October 2026";
+
+const RAW: Page[] = [
   {
     slug: "egate-new-zealand",
     nav: "eGate at the border",
@@ -799,6 +802,8 @@ export const PRACTICAL_PAGES: Page[] = [
     ],
   },
 ];
+
+export const PRACTICAL_PAGES: Page[] = RAW.map((p) => ({ ...p, checked: CHECKED }));
 
 /** ハブ: 入国後の実用ページ＋既存の入国関連ページをまとめる（トップの一覧とは別の入口） */
 export const HUB_PAGE: Page = {

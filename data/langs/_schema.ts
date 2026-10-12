@@ -23,6 +23,8 @@ export type LangPage = {
   /** 同じ言語ディレクトリ内のスラッグ。関連カードに優先して出す */
   related?: string[];
   faq?: Faq[];
+  /** このページを公式で確認した日（その言語の表記）。無ければ FACTS.updatedLabel */
+  checked?: string;
 };
 
 export type LangContent = {

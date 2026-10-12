@@ -31,6 +31,8 @@ export type Page = {
   related?: string[];
   /** よくある質問。本文の後に表示し、FAQPage 構造化データも出す */
   faq?: Faq[];
+  /** このページを公式で確認した日（表示用）。無ければ FACTS.updatedLabel */
+  checked?: string;
 };
 
 export type Faq = { q: string; a: string };

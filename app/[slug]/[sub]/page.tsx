@@ -4,7 +4,7 @@ import Reveal from "@/components/Reveal";
 import StickyCta from "@/components/StickyCta";
 import { FACTS as F, OG_IMAGES, SITE } from "@/data/facts";
 import DocFaq from "@/components/DocFaq";
-import { LANGS, LANG_PAGE_PARAMS } from "@/data/langs";
+import { LANGS, LANG_CODES, LANG_PAGE_PARAMS } from "@/data/langs";
 import { pickRelated } from "@/data/pages";
 
 /*
@@ -39,7 +39,17 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     alternates: {
       canonical: `${SITE}/${lang}/${sub}/`,
       // ⚠️ 対応する英語ページ（enSlug）を en として示す。翻訳の対応関係を明示するのが目的。
-      languages: { en: `${SITE}/${doc.enSlug}/`, [t.htmlLang]: `${SITE}/${lang}/${sub}/` },
+      // 同じ enSlug を持つ他言語版も並べる（de⇄ko も相互に示す）
+      languages: {
+        en: `${SITE}/${doc.enSlug}/`,
+        ...Object.fromEntries(
+          LANG_CODES.flatMap((c) => {
+            const m = LANGS[c].pages.find((p) => p.enSlug === doc.enSlug);
+            return m ? [[LANGS[c].htmlLang, `${SITE}/${c}/${m.slug}/`]] : [];
+          }),
+        ),
+        "x-default": `${SITE}/${doc.enSlug}/`,
+      },
     },
     openGraph: { title: doc.title, description: doc.description, locale: t.htmlLang, type: "article", images: OG_IMAGES },
   };
@@ -81,7 +91,7 @@ export default async function LangDoc({ params }: { params: Promise<{ slug: stri
             {doc.description}
           </p>
           <p className="mt-4 text-xs" style={{ color: "rgba(255,255,255,.7)" }}>
-            {t.ui.updated} {F.updatedLabel}
+            {t.ui.updated} {doc.checked ?? F.updatedLabel}
           </p>
         </div>
       </section>

@@ -1,4 +1,5 @@
 import { FACTS as F, type LangContent } from "./_schema";
+import { KO_PRACTICAL } from "./ko-practical";
 
 /**
  * 韓国語（/ko/）。読者＝韓国のパスポート保持者。
@@ -434,5 +435,7 @@ export const ko: LangContent = {
         },
       ],
     },
+    // 入国後の実用ページ（ko-practical.ts）
+    ...KO_PRACTICAL,
   ],
 };

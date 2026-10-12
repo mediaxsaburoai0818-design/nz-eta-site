@@ -37,6 +37,7 @@ export function enDocMetadata(slug: string): Metadata {
             return m ? [[LANGS[c].htmlLang, `${SITE}/${c}/${m.slug}/`]] : [];
           }),
         ),
+        "x-default": `${SITE}/${slug}/`,
       },
     },
     openGraph: { title: doc.title, description: doc.description, locale: "en", type: "article", images: OG_IMAGES },
@@ -76,7 +77,7 @@ export default function EnglishDoc({ slug }: { slug: string }) {
           <p className="mt-4 text-sm leading-relaxed" style={{ color: "rgba(255,255,255,.85)" }}>
             {doc.description}
           </p>
-          <p className="mt-4 text-xs" style={{ color: "rgba(255,255,255,.7)" }}>Checked {F.updatedLabel}</p>
+          <p className="mt-4 text-xs" style={{ color: "rgba(255,255,255,.7)" }}>Checked {doc.checked ?? F.updatedLabel}</p>
         </div>
       </section>
 

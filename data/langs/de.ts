@@ -1,4 +1,5 @@
 import { FACTS as F, type LangContent } from "./_schema";
+import { DE_PRACTICAL } from "./de-practical";
 
 /**
  * ドイツ語（/de/）。読者＝ドイツのパスポート保持者。
@@ -242,7 +243,7 @@ export const de: LangContent = {
       enSlug: "biosecurity",
       nav: "Biosicherheit",
       title: `Biosicherheit in Neuseeland: ${F.biosecurityInstantFine} sofort bei falscher Angabe`,
-      description: `Neuseeland kontrolliert Lebensmittel und Naturprodukte streng. Eine nicht angegebene Mitbringsel kostet ${F.biosecurityInstantFine} — auch ohne Absicht.`,
+      description: `Neuseeland kontrolliert Lebensmittel und Naturprodukte streng. Ein nicht angegebenes Mitbringsel kostet ${F.biosecurityInstantFine} — auch ohne Absicht.`,
       blocks: [
         {
           p: `Neuseeland ist eine Inselgruppe mit einer Landwirtschaft, die auf Freiheit von bestimmten Schädlingen angewiesen ist. Die Kontrollen bei der Einreise sind entsprechend streng, und sie werden durchgesetzt.`,
@@ -447,5 +448,7 @@ export const de: LangContent = {
         },
       ],
     },
+    // 入国後の実用ページ（de-practical.ts）
+    ...DE_PRACTICAL,
   ],
 };
