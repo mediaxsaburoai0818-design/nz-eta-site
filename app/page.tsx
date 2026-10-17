@@ -1,13 +1,21 @@
 import type { Metadata } from "next";
-import Image from "next/image";
-import Reveal from "@/components/Reveal";
-import StickyCta from "@/components/StickyCta";
+import HomeChrome from "@/components/HomeChrome";
+import { HOME_TOP, HOME_BOTTOM } from "@/lib/eta-home";
+import "./eta-home.css";
 import Link from "next/link";
 import { FACTS as F, OG_IMAGES, SITE } from "@/data/facts";
 import { LANGS, LANG_CODES } from "@/data/langs";
 import { PAGES } from "@/data/pages";
 
 /*
+  ⚠️ 2026-10-17 デザインリニューアル（okina 選択：写真C オークランドの港とスカイタワー／右上A コル＋「Kia ora」／配色B ルピナスの紫・湖のターコイズ）。
+     正は ~/projects/nzeta-redesign/build。HOME_TOP / HOME_BOTTOM / eta-home.css / public/home は
+     ~/projects/nzeta-redesign/gen-home.py が生成する（手で直さない）。ESTA（esta-hr.com）・カナダと同じ方式。
+     上＝新デザイン（スライダー4枚）、中＝旧TOPの本文のうちデザインに無いもの（.xsec）、下＝CTA＋フッター。
+     TOP では layout の Header/Footer は出さない（components/NotOnHome.tsx）。
+     左上のロゴは市松模様を消したファビコンの縮小版（public/home/logo.png）。本番ファビコンは未変更（okina 判断待ち）。
+
+  （以下は旧デザインのときのメモ）
   構成は eta-se.com（UK ETA）に合わせて統一感を出している。
   UIの作りも同サイトの実装値に合わせた（okina指摘の差分）:
     ・CTAボタン  .btn-red / .cta-button-red（radius .625〜.75rem・hoverで1px浮く）
@@ -40,13 +48,6 @@ export const metadata: Metadata = {
     images: OG_IMAGES,
   },
 };
-
-const STATS = [
-  { v: F.totalApp, l: "What you pay", s: `${F.feeApp} request fee + ${F.ivl} IVL` },
-  { v: `${F.validYears} years`, l: "Valid for", s: "Multiple entries allowed" },
-  { v: "3 months", l: "Stay per visit", s: `${F.stayUkMonths} months on a UK passport` },
-  { v: F.decisionTypical, l: "Processing time", s: "Often approved in minutes" },
-];
 
 const FEATURES = [
   {
@@ -123,250 +124,145 @@ export default function Home() {
       acceptedAnswer: { "@type": "Answer", text: f.a },
     })),
   };
+  // 言語メニュー（data/langs に言語を足せば自動で増える）と確認日は facts / langs から差し込む
+  const langItems =
+    `<li><a href="/" hreflang="en">English</a></li>` +
+    LANG_CODES.map((c) => `<li><a href="/${c}/" hreflang="${LANGS[c].htmlLang}">${LANGS[c].label}</a></li>`).join("");
+  const top = HOME_TOP.replace("<!--LANGS-->", langItems);
+  const bottom = HOME_BOTTOM.replace("<!--UPDATED-->", F.updatedLabel);
+  const readMore = PAGES.filter((p) => !["privacy", "terms", "about"].includes(p.slug));
 
   return (
-    <>
+    <div className="etahome" data-c="B" data-pat="1">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
-      <Reveal />
-      <StickyCta />
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+      {/* eslint-disable-next-line @next/next/no-page-custom-font */}
+      <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500;1,9..144,600&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" precedence="default" />
+      <div className="main-wrap" dangerouslySetInnerHTML={{ __html: top }} />
 
-      {/* ── ヒーロー ── */}
-      <section className="hero">
-        <div className="hero-media">
-          <Image
-            src="/images/hero-nz.webp"
-            alt="Turquoise glacial lake below the snow-capped Southern Alps, New Zealand"
-            fill
-            priority
-            className="hero-img hero-zoom"
-          />
-        </div>
-        <div className="hero-scrim" />
-        <div className="hero-inner max-w-6xl mx-auto px-6 py-20 lg:py-28">
-          <span className="eyebrow">New Zealand Electronic Travel Authority</span>
-          <h1
-            className="mt-5 text-3xl md:text-5xl font-bold leading-tight"
-            style={{ color: "#ffffff", maxWidth: "22ch" }}
-          >
-            The NZeTA costs{" "}
-            <span style={{ color: "var(--color-red-light)" }}>{F.totalApp}</span> once the IVL is
-            included
-          </h1>
-          <p
-            className="mt-5 text-base md:text-lg leading-relaxed"
-            style={{ color: "rgba(255,255,255,.9)", maxWidth: "52ch" }}
-          >
-            Most guides quote {F.feeApp}. That is only the request fee — the {F.ivl} visitor levy is taken
-            at the same time. Here is what you actually pay, and how to apply through the official
-            channels.
-          </p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <a href={F.officialUrl} target="_blank" rel="noopener noreferrer" className="btn-red">
-              Apply on the official site
-            </a>
-            <a href="#cost" className="btn-outline-light">
-              See the full cost
-            </a>
-          </div>
-          <p className="mt-6 text-xs" style={{ color: "rgba(255,255,255,.75)" }}>
-            Independent guide · not affiliated with the New Zealand Government · updated {F.updatedLabel}
-          </p>
-        </div>
-      </section>
-
-      {/* ── 統計カード（ヒーロー直下にせり出す）── */}
-      <section
-        className="max-w-6xl mx-auto px-6"
-        style={{ marginTop: "-3rem", position: "relative", zIndex: 2 }}
-      >
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-          {STATS.map((s, i) => (
-            <div key={s.l} className={`card stat-card text-center reveal reveal-delay-${i + 1}`}>
-              <p className="stat-num">{s.v}</p>
-              <p className="stat-label">{s.l}</p>
-              <p className="text-xs mt-1" style={{ color: "var(--color-text-light)" }}>
-                {s.s}
-              </p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* ── What is ── */}
-      <section className="max-w-5xl mx-auto px-6 py-16 md:py-20">
-        <h2 className="heading-band text-2xl md:text-3xl reveal">What is the NZeTA?</h2>
-        <p className="mt-5 leading-relaxed reveal reveal-delay-1" style={{ maxWidth: "70ch" }}>
-          The New Zealand Electronic Travel Authority is a pre-travel authorisation, not a visa. If
-          you hold a passport from a visa-waiver country or territory, you need it before you board.
-          It is also required for cruise passengers and for most transit passengers.
-        </p>
-        <p className="mt-4 leading-relaxed reveal reveal-delay-2" style={{ maxWidth: "70ch" }}>
-          It is linked to the passport you apply with, lasts {F.validYears} years, and allows
-          multiple entries. Most visitors may stay up to three months per visit; holders of a UK
-          passport may stay up to {F.stayUkMonths} months. The border officer decides how long you
-          may stay on arrival.
-        </p>
-        <div className="mt-10 grid md:grid-cols-3 gap-5">
-          {FEATURES.map((f, i) => (
-            <div key={f.h} className={`feature-card reveal reveal-delay-${i + 1}`}>
-              <h3 className="font-bold" style={{ color: "var(--color-navy)" }}>
-                {f.h}
-              </h3>
-              <p className="mt-2 text-sm leading-relaxed">{f.p}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* ── 料金（NZeTA固有の要点）── */}
-      <section id="cost" style={{ background: "var(--color-bg-soft)" }}>
-        <div className="max-w-5xl mx-auto px-6 py-16 md:py-20">
-          <h2 className="heading-band text-2xl md:text-3xl reveal">What it actually costs</h2>
-          <p className="mt-5 leading-relaxed reveal reveal-delay-1" style={{ maxWidth: "70ch" }}>
+      {/* ── 料金の内訳（NZeTA固有：申請料と IVL は別）＋3つの要点 ── */}
+      <section id="cost" className="section xsec xsec-alt">
+        <div className="container">
+          <span className="eyebrow">Cost</span>
+          <h2>What it actually costs</h2>
+          <p className="xlead">
             Two separate charges are taken in a single transaction, which is where most people go wrong.
           </p>
-          <div className="mt-7 card reveal reveal-delay-2" style={{ padding: "1.6rem 1.6rem" }}>
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm" style={{ borderCollapse: "collapse", minWidth: "34rem" }}>
-                <thead>
-                  <tr style={{ background: "var(--color-navy)", color: "#fff" }}>
-                    <th className="text-left px-4 py-3">How you apply</th>
-                    <th className="text-left px-4 py-3">Request fee</th>
-                    <th className="text-left px-4 py-3">IVL</th>
-                    <th className="text-left px-4 py-3">You pay</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
-                    <td className="px-4 py-3 font-medium">Official app</td>
-                    <td className="px-4 py-3">{F.feeApp}</td>
-                    <td className="px-4 py-3">{F.ivl}</td>
-                    <td className="px-4 py-3 font-bold" style={{ color: "var(--color-red-vivid)" }}>
-                      {F.totalApp}
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="px-4 py-3 font-medium">Website</td>
-                    <td className="px-4 py-3">{F.feeWeb}</td>
-                    <td className="px-4 py-3">{F.ivl}</td>
-                    <td className="px-4 py-3 font-bold">{F.totalWeb}</td>
-                  </tr>
-                </tbody>
-              </table>
+          <div className="xtable-wrap">
+            <table className="xtable">
+              <thead>
+                <tr>
+                  <th>How you apply</th>
+                  <th>Request fee</th>
+                  <th>IVL</th>
+                  <th>You pay</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td data-label="Apply via">Official app</td>
+                  <td data-label="Request fee">{F.feeApp}</td>
+                  <td data-label="IVL">{F.ivl}</td>
+                  <td data-label="You pay" className="xfree">{F.totalApp}</td>
+                </tr>
+                <tr>
+                  <td data-label="Apply via">Website</td>
+                  <td data-label="Request fee">{F.feeWeb}</td>
+                  <td data-label="IVL">{F.ivl}</td>
+                  <td data-label="You pay"><strong>{F.totalWeb}</strong></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p className="xnote">
+            The IVL — the International Visitor Conservation and Tourism Levy — is a separate charge from the NZeTA
+            itself. It rose from NZ$35 to {F.ivl} in October 2024 and is still {F.ivl} as of {F.updatedLabel}. Sites
+            that advertise only {F.feeApp} are quoting the request fee alone.
+          </p>
+          <div className="xcards x3">
+            {FEATURES.map((f) => (
+              <div key={f.h} className="xcard">
+                <h3>{f.h}</h3>
+                <p>{f.p}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── 申請手順（詳細）＋入国時 ── */}
+      <section className="section xsec">
+        <div className="container">
+          <span className="eyebrow">Step by step</span>
+          <h2>How to apply</h2>
+          <div className="xcards x2">
+            {STEPS.map((s, i) => (
+              <div key={s.h} className="xcard">
+                <span className="eyebrow">Step {i + 1}</span>
+                <h3>{s.h}</h3>
+                <p>{s.p}</p>
+              </div>
+            ))}
+          </div>
+          <div className="xcards x2">
+            <div className="xcard">
+              <h3>At the border</h3>
+              <p>
+                There is nothing to print. Just carry the same passport you applied with — your authorisation is held
+                against it electronically. You will also need to complete a New Zealand Traveller Declaration before
+                you arrive, which is separate from the NZeTA and free of charge.
+              </p>
             </div>
           </div>
-          <p className="mt-6 leading-relaxed text-sm reveal reveal-delay-3" style={{ maxWidth: "70ch" }}>
-            The IVL — the International Visitor Conservation and Tourism Levy — is a separate charge
-            from the NZeTA itself. It rose from NZ$35 to {F.ivl} in October 2024 and is still{" "}
-            {F.ivl} as of {F.updatedLabel}. Sites that advertise only {F.feeApp} are quoting the request
-            fee alone.
-          </p>
-        </div>
-      </section>
-
-      {/* ── 申請手順 ── */}
-      <section className="max-w-5xl mx-auto px-6 py-16 md:py-20">
-        <h2 className="heading-band text-2xl md:text-3xl reveal">How to apply</h2>
-        <div className="mt-8 grid md:grid-cols-2 gap-5">
-          {STEPS.map((s, i) => (
-            <div key={s.h} className={`feature-card reveal reveal-delay-${(i % 4) + 1}`}>
-              <p
-                className="text-xs font-bold tracking-widest"
-                style={{ color: "var(--color-gold-dark)" }}
-              >
-                STEP {i + 1}
-              </p>
-              <h3 className="mt-2 font-bold" style={{ color: "var(--color-navy)" }}>
-                {s.h}
-              </h3>
-              <p className="mt-2 text-sm leading-relaxed">{s.p}</p>
-            </div>
-          ))}
-        </div>
-        <div className="mt-10 reveal">
-          <a href={F.officialUrl} target="_blank" rel="noopener noreferrer" className="cta-button-red">
-            Start on the official NZeTA site
-          </a>
-        </div>
-      </section>
-
-      {/* ── 入国時 ── */}
-      <section style={{ background: "var(--color-bg-soft)" }}>
-        <div className="max-w-5xl mx-auto px-6 py-16 md:py-20">
-          <h2 className="heading-band text-2xl md:text-3xl reveal">At the border</h2>
-          <p className="mt-5 leading-relaxed reveal reveal-delay-1" style={{ maxWidth: "70ch" }}>
-            There is nothing to print. Just carry the same passport you applied with — your authorisation
-            is held against it electronically. You will also need to complete a New Zealand Traveller
-            Declaration before you arrive, which is separate from the NZeTA and free of charge.
-          </p>
         </div>
       </section>
 
       {/* ── FAQ ── */}
-      <section className="max-w-4xl mx-auto px-6 py-16 md:py-20">
-        <h2 className="heading-band text-2xl md:text-3xl reveal">Frequently asked questions</h2>
-        <div className="mt-8 space-y-4">
-          {FAQ.map((f, i) => (
-            <details key={f.q} className={`card group reveal reveal-delay-${(i % 4) + 1}`}>
-              <summary className="flex items-start justify-between gap-4 font-bold cursor-pointer list-none">
-                <span>{f.q}</span>
-                <span
-                  className="shrink-0 transition-transform group-open:rotate-45"
-                  style={{ color: "var(--color-red-vivid)", fontSize: "1.25rem", lineHeight: 1 }}
-                  aria-hidden="true"
-                >
-                  +
-                </span>
-              </summary>
-              <p className="mt-3 text-sm leading-relaxed">{f.a}</p>
-            </details>
-          ))}
+      <section id="faq" className="section xsec xsec-alt">
+        <div className="container xnarrow">
+          <span className="eyebrow">FAQ</span>
+          <h2>Frequently asked questions</h2>
+          <div className="xfaq">
+            {FAQ.map((f) => (
+              <details key={f.q}>
+                <summary>
+                  <span>{f.q}</span>
+                  <span className="xplus" aria-hidden="true">+</span>
+                </summary>
+                <p>{f.a}</p>
+              </details>
+            ))}
+          </div>
+          <Link href="/faq/" className="textlink xmore">
+            All questions <span className="arrow" aria-hidden="true">→</span>
+          </Link>
         </div>
       </section>
 
       {/* ── 下層ページへの導線 ── */}
-      <section className="max-w-5xl mx-auto px-6 py-16 md:py-20">
-        <h2 className="heading-band text-2xl md:text-3xl reveal">Read more about the NZeTA</h2>
-        <div className="mt-8 grid md:grid-cols-3 gap-5">
-          {PAGES.filter((p) => !["privacy", "terms", "about"].includes(p.slug)).map((p, i) => (
-            <Link key={p.slug} href={`/${p.slug}/`} className={`feature-card no-underline reveal reveal-delay-${(i % 4) + 1}`}>
-              <h3 className="font-bold" style={{ color: "var(--color-navy)" }}>{p.nav}</h3>
-              <p className="mt-2 text-sm leading-relaxed">{p.description}</p>
-            </Link>
-          ))}
-        </div>
-        <div className="mt-8 flex flex-wrap gap-4 text-xs reveal">
-          {PAGES.filter((p) => ["about", "privacy", "terms"].includes(p.slug)).map((p) => (
-            <Link key={p.slug} href={`/${p.slug}/`}>{p.nav}</Link>
-          ))}
-        </div>
-      </section>
-
-      {/* ── CTA ── */}
-      <section style={{ background: "var(--color-navy)" }}>
-        <div className="max-w-3xl mx-auto px-6 py-16 md:py-20 text-center">
-          <h2 className="text-2xl md:text-3xl font-bold reveal" style={{ color: "#fff" }}>
-            Start your NZeTA application
-          </h2>
-          <p
-            className="mt-4 text-sm leading-relaxed reveal reveal-delay-1"
-            style={{ color: "rgba(255,255,255,.85)" }}
-          >
-            Applications are made through Immigration New Zealand&apos;s own app and website. We are an
-            independent guide and cannot submit an application on your behalf.
-          </p>
-          <div className="mt-8 reveal reveal-delay-2">
-            <a
-              href={F.officialUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="cta-button-red"
-            >
-              Go to the official NZeTA page
-            </a>
+      <section id="read-more" className="section xsec">
+        <div className="container">
+          <span className="eyebrow">Guide</span>
+          <h2>Read more about the NZeTA</h2>
+          <div className="xcards x3">
+            {readMore.map((p) => (
+              <Link key={p.slug} href={`/${p.slug}/`} className="xcard xlink">
+                <div className="xrow">
+                  <div>
+                    <h3>{p.nav}</h3>
+                    <p>{p.description}</p>
+                  </div>
+                  <span className="xgo" aria-hidden="true">→</span>
+                </div>
+              </Link>
+            ))}
           </div>
         </div>
       </section>
-    </>
+
+      <div className="main-wrap" dangerouslySetInnerHTML={{ __html: bottom }} />
+      <HomeChrome />
+    </div>
   );
 }
