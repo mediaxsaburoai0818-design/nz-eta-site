@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import SubAside from "@/components/SubAside";
+import { chromeFor, DATA_C } from "@/lib/chrome-l10n";
 import Reveal from "@/components/Reveal";
 import StickyCta from "@/components/StickyCta";
 import { FACTS as F, OG_IMAGES, SITE } from "@/data/facts";
@@ -75,28 +77,29 @@ export default async function LangDoc({ params }: { params: Promise<{ slug: stri
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ld) }} />
       <Reveal />
-      <StickyCta title={t.sticky.title} sub={t.sticky.sub} button={t.sticky.button} />
 
-      <section style={{ background: "var(--color-navy)" }}>
-        <div className="max-w-3xl mx-auto px-6 py-12 md:py-16">
-          <nav className="text-xs" style={{ color: "rgba(255,255,255,.75)" }}>
-            <Link href={`/${lang}/`} style={{ color: "rgba(255,255,255,.85)" }}>{t.siteName}</Link>
+      {/* 2026-10-21 下層ページの新デザイン（皮）：見出しの帯＋本文（左）＋目次と申請欄（右）。文言・順序・リンクは旧版のまま */}
+      <div className="etahome xskin" data-c={DATA_C} data-pat="1">
+        <StickyCta title={t.sticky.title} sub={t.sticky.sub} button={t.sticky.button} />
+        <div className="xgrid">
+          <section className="xhero">
+          <nav className="xcrumb" aria-label="Breadcrumb">
+            <Link href={`/${lang}/`}>{t.siteName}</Link>
             <span> › </span>
             <span>{doc.nav}</span>
           </nav>
-          <h1 className="mt-4 text-2xl md:text-4xl font-bold leading-tight" style={{ color: "#fff" }}>
+          <h1>
             {doc.title}
           </h1>
-          <p className="mt-4 text-sm leading-relaxed" style={{ color: "rgba(255,255,255,.85)" }}>
+          <p className="xlead">
             {doc.description}
           </p>
-          <p className="mt-4 text-xs" style={{ color: "rgba(255,255,255,.7)" }}>
+          <p className="xchecked">
             {t.ui.updated} {doc.checked ?? F.updatedLabel}
           </p>
-        </div>
-      </section>
+          </section>
 
-      <article className="max-w-3xl mx-auto px-6 py-14 md:py-16">
+      <article className="xbody">
         {doc.blocks.map((b, i) => {
           if ("h2" in b) return <h2 key={i} className="heading-band text-xl md:text-2xl mt-10 first:mt-0 reveal">{b.h2}</h2>;
           if ("p" in b) return <p key={i} className="mt-4 leading-relaxed reveal">{b.p}</p>;
@@ -155,6 +158,10 @@ export default async function LangDoc({ params }: { params: Promise<{ slug: stri
 
         <p className="mt-12 text-xs leading-relaxed" style={{ color: "var(--color-text-light)" }}>{t.disclaimer}</p>
       </article>
+          <SubAside t={chromeFor(lang).aside} />
+        </div>
+        <div className="xfinal" dangerouslySetInnerHTML={{ __html: chromeFor(lang).cta }} />
+      </div>
     </>
   );
 }

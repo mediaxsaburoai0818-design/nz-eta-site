@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Noto_Sans, Noto_Serif } from "next/font/google";
 import "./globals.css";
+// 新デザインのヘッダー・フッター（.etahome）と下層ページの皮（.xskin）。規則はすべてこの2クラスの配下（2026-10-21）
+import "./eta-home.css";
+import "./sub-skin.css";
 import { OG_IMAGES } from "@/data/facts";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
