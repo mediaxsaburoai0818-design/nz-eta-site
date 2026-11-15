@@ -25,6 +25,8 @@ export type LangPage = {
   faq?: Faq[];
   /** このページを公式で確認した日（その言語の表記）。無ければ FACTS.updatedLabel */
   checked?: string;
+  /** 言語版に追加した日（YYYY-MM-DD）。sitemap の lastmod に使う（2026-11-15 の英語ページ横展開から） */
+  added?: string;
 };
 
 export type LangContent = {

@@ -28,9 +28,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly" as const,
       priority: 0.8,
     })),
-    ...LANG_PAGE_PARAMS.map(({ lang, slug }) => ({
+    ...LANG_PAGE_PARAMS.map(({ lang, slug, added }) => ({
       url: `${SITE}/${lang}/${slug}/`,
-      lastModified: d,
+      lastModified: added ? new Date(added) : d,
       changeFrequency: "monthly" as const,
       priority: 0.6,
     })),

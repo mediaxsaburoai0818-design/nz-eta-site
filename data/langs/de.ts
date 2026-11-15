@@ -1,6 +1,9 @@
 import { FACTS as F, type LangContent } from "./_schema";
 import { DE_PRACTICAL } from "./de-practical";
 
+/** F.decisionTypical（"72 hours"）のドイツ語表記。⚠️ F 側を変えたらここも変える */
+const DECISION = "72 Stunden"; // = F.decisionTypical
+
 /**
  * ドイツ語（/de/）。読者＝ドイツのパスポート保持者。
  *
@@ -21,7 +24,7 @@ export const de: LangContent = {
   tagline: "Die neuseeländische Reisegenehmigung, Schritt für Schritt erklärt",
   homeTitle: `NZeTA für Deutsche: ${F.totalApp} insgesamt und ${F.validYears} Jahre gültig`,
   homeDescription: `Deutschsprachiger Ratgeber zur NZeTA: Antragsgebühr ${F.feeApp} plus Abgabe ${F.ivl}, zusammen ${F.totalApp}. Gültig ${F.validYears} Jahre, Aufenthalt bis zu ${F.stayMonths} Monaten pro Einreise.`,
-  homeLead: `Mit einem deutschen Reisepass brauchen Sie für Neuseeland kein Visum, aber eine NZeTA. Sie kostet ${F.feeApp} über die offizielle App plus die Abgabe von ${F.ivl} — zusammen ${F.totalApp}. Die Entscheidung kommt üblicherweise innerhalb von ${F.decisionTypical}.`,
+  homeLead: `Mit einem deutschen Reisepass brauchen Sie für Neuseeland kein Visum, aber eine NZeTA. Sie kostet ${F.feeApp} über die offizielle App plus die Abgabe von ${F.ivl} — zusammen ${F.totalApp}. Die Entscheidung kommt üblicherweise innerhalb von ${DECISION}.`,
   officialLinkLabel: "Auf der offiziellen Seite Neuseelands beantragen",
   sticky: {
     title: `NZeTA beantragen — ${F.totalApp} inklusive Abgabe`,
@@ -181,7 +184,7 @@ export const de: LangContent = {
       enSlug: "how-to-apply",
       nav: "Antrag stellen",
       title: "Wie Sie die NZeTA beantragen — und wo",
-      description: `Der Antrag läuft über die offizielle App oder die Website Neuseelands. Die Entscheidung kommt meist innerhalb von ${F.decisionTypical}.`,
+      description: `Der Antrag läuft über die offizielle App oder die Website Neuseelands. Die Entscheidung kommt meist innerhalb von ${DECISION}.`,
       blocks: [
         {
           p: `Es gibt genau zwei offizielle Wege: die App von Immigration New Zealand und deren Website. Alles andere ist ein Vermittler.`,
@@ -196,7 +199,7 @@ export const de: LangContent = {
         },
         { h2: "Zeitpunkt" },
         {
-          p: `Die Entscheidung kommt üblicherweise innerhalb von ${F.decisionTypical}, kann aber länger dauern. Beantragen Sie die Genehmigung nicht am Abflugtag. Fluggesellschaften prüfen den Status beim Check-in.`,
+          p: `Die Entscheidung kommt üblicherweise innerhalb von ${DECISION}, kann aber länger dauern. Beantragen Sie die Genehmigung nicht am Abflugtag. Fluggesellschaften prüfen den Status beim Check-in.`,
         },
         {
           note: `Tragen Sie Namen, Passnummer und Geburtsdatum genau so ein, wie sie im Pass stehen. Abweichungen sind der häufigste Grund für Probleme beim Einsteigen.`,
@@ -275,11 +278,11 @@ export const de: LangContent = {
       slug: "bearbeitungszeit",
       enSlug: "processing-time",
       nav: "Bearbeitungszeit",
-      title: `Wie lange dauert die NZeTA? Rechnen Sie mit ${F.decisionTypical}`,
-      description: `Die meisten Anträge werden in Minuten entschieden. Immigration New Zealand nennt trotzdem ${F.decisionTypical} als Richtwert — und darauf sollten Sie planen.`,
+      title: `Wie lange dauert die NZeTA? Rechnen Sie mit ${DECISION}`,
+      description: `Die meisten Anträge werden in Minuten entschieden. Immigration New Zealand nennt trotzdem ${DECISION} als Richtwert — und darauf sollten Sie planen.`,
       blocks: [
         {
-          p: `Die offizielle Angabe lautet: bis zu ${F.decisionTypical}. In der Praxis wird ein großer Teil der Anträge automatisch innerhalb weniger Minuten genehmigt. Damit sollten Sie aber nicht planen.`,
+          p: `Die offizielle Angabe lautet: bis zu ${DECISION}. In der Praxis wird ein großer Teil der Anträge automatisch innerhalb weniger Minuten genehmigt. Damit sollten Sie aber nicht planen.`,
         },
         { h2: "Was eine Entscheidung verzögert" },
         {
@@ -353,7 +356,7 @@ export const de: LangContent = {
         },
         { h2: "Was zu tun ist" },
         {
-          p: `Beantragen Sie die NZeTA vor dem Abflug, genau wie jeder andere Reisende: ${F.feeApp} in der offiziellen App oder ${F.feeWeb} über die Website, und planen Sie die ${F.decisionTypical} ein, die eine Entscheidung üblicherweise braucht.`,
+          p: `Beantragen Sie die NZeTA vor dem Abflug, genau wie jeder andere Reisende: ${F.feeApp} in der offiziellen App oder ${F.feeWeb} über die Website, und planen Sie die ${DECISION} ein, die eine Entscheidung üblicherweise braucht.`,
         },
         {
           note: `Wenn sich Ihre Reiseroute ändert und aus dem Umstieg ein längerer Aufenthalt außerhalb des Flughafens wird, sind Sie kein Transitpassagier mehr, sondern Besucher — dann gelten die Bedingungen für Besuchsaufenthalte.`,

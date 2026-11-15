@@ -1,6 +1,9 @@
 import { FACTS as F, type LangContent } from "./_schema";
 import { KO_PRACTICAL } from "./ko-practical";
 
+/** 表示用（"72 hours" を韓国語文中にそのまま出さない）。値は F.decisionTypical と同じ */
+const DECISION = "72시간"; // = F.decisionTypical
+
 /**
  * 韓国語（/ko/）。読者＝韓国のパスポート保持者。
  *
@@ -20,7 +23,7 @@ export const ko: LangContent = {
   tagline: "뉴질랜드 전자여행허가(NZeTA) 안내",
   homeTitle: `한국 여권의 NZeTA: 총 ${F.totalApp}, 유효기간 ${F.validYears}년`,
   homeDescription: `뉴질랜드 NZeTA 한국어 안내. 신청 수수료 ${F.feeApp}에 관광보전부담금(IVL) ${F.ivl}이 함께 부과되어 합계 ${F.totalApp}입니다. 유효기간 ${F.validYears}년, 1회 입국당 최대 ${F.stayMonths}개월 체류.`,
-  homeLead: `대한민국 여권이라면 뉴질랜드 여행에 비자는 필요 없지만 NZeTA는 필요합니다. 공식 앱으로 신청하면 ${F.feeApp}, 여기에 ${F.ivl}의 관광보전부담금(IVL)이 함께 부과되어 합계 ${F.totalApp}입니다. 결과는 보통 ${F.decisionTypical} 안에 나옵니다.`,
+  homeLead: `대한민국 여권이라면 뉴질랜드 여행에 비자는 필요 없지만 NZeTA는 필요합니다. 공식 앱으로 신청하면 ${F.feeApp}, 여기에 ${F.ivl}의 관광보전부담금(IVL)이 함께 부과되어 합계 ${F.totalApp}입니다. 결과는 보통 ${DECISION} 안에 나옵니다.`,
   officialLinkLabel: "뉴질랜드 공식 사이트에서 신청하기",
   sticky: {
     title: `NZeTA 신청 — 부담금 포함 ${F.totalApp}`,
@@ -180,7 +183,7 @@ export const ko: LangContent = {
       enSlug: "how-to-apply",
       nav: "신청 방법",
       title: "NZeTA 신청 방법과 신청처",
-      description: `공식 앱 또는 뉴질랜드 정부 웹사이트에서 신청합니다. 결과는 보통 ${F.decisionTypical} 안에 나옵니다.`,
+      description: `공식 앱 또는 뉴질랜드 정부 웹사이트에서 신청합니다. 결과는 보통 ${DECISION} 안에 나옵니다.`,
       blocks: [
         {
           p: `공식 경로는 정확히 두 가지입니다. Immigration New Zealand의 앱과 같은 기관의 웹사이트입니다. 그 밖의 사이트는 모두 대행업체입니다.`,
@@ -195,7 +198,7 @@ export const ko: LangContent = {
         },
         { h2: "언제 신청할까" },
         {
-          p: `결과는 보통 ${F.decisionTypical} 안에 나오지만 더 걸릴 수 있습니다. 출발 당일에 신청하지 마십시오. 항공사는 체크인 때 승인 여부를 전자적으로 확인합니다.`,
+          p: `결과는 보통 ${DECISION} 안에 나오지만 더 걸릴 수 있습니다. 출발 당일에 신청하지 마십시오. 항공사는 체크인 때 승인 여부를 전자적으로 확인합니다.`,
         },
         {
           note: `이름·여권번호·생년월일은 여권에 인쇄된 그대로 입력하십시오. 철자 하나의 차이가 탑승 거부로 이어지는 가장 흔한 원인입니다.`,
@@ -212,11 +215,11 @@ export const ko: LangContent = {
       slug: "processing-time",
       enSlug: "processing-time",
       nav: "소요 시간",
-      title: `NZeTA는 얼마나 걸리나 — ${F.decisionTypical}을 잡아 두십시오`,
-      description: `대부분 몇 분 안에 승인되지만, 공식 안내는 ${F.decisionTypical}입니다. 일정은 그 기준으로 잡는 편이 안전합니다.`,
+      title: `NZeTA는 얼마나 걸리나 — ${DECISION}을 잡아 두십시오`,
+      description: `대부분 몇 분 안에 승인되지만, 공식 안내는 ${DECISION}입니다. 일정은 그 기준으로 잡는 편이 안전합니다.`,
       blocks: [
         {
-          p: `공식 안내는 "최대 ${F.decisionTypical}"입니다. 실제로는 상당수가 몇 분 안에 자동 승인되지만, 그것을 전제로 일정을 짜서는 안 됩니다.`,
+          p: `공식 안내는 "최대 ${DECISION}"입니다. 실제로는 상당수가 몇 분 안에 자동 승인되지만, 그것을 전제로 일정을 짜서는 안 됩니다.`,
         },
         { h2: "심사가 길어지는 경우" },
         {
@@ -346,7 +349,7 @@ export const ko: LangContent = {
         },
         { h2: "무엇을 하면 되나" },
         {
-          p: `다른 여행자와 동일하게 출발 전에 신청하면 됩니다. 공식 앱 ${F.feeApp} 또는 웹사이트 ${F.feeWeb}이고, 심사에 보통 ${F.decisionTypical}이 걸립니다.`,
+          p: `다른 여행자와 동일하게 출발 전에 신청하면 됩니다. 공식 앱 ${F.feeApp} 또는 웹사이트 ${F.feeWeb}이고, 심사에 보통 ${DECISION}이 걸립니다.`,
         },
         {
           note: `일정이 바뀌어 공항 밖으로 나가는 긴 체류가 되면 더 이상 환승이 아니라 방문입니다. 방문객 조건이 그대로 적용됩니다.`,

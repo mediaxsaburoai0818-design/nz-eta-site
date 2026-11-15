@@ -9,10 +9,13 @@ import type { LangPage } from "./_schema";
  * ⚠️ 韓国の免許が「英語表記」に当たるかはNZ公式で未確認 → 書かない。
  * ⚠️ 韓国の電圧・プラグ形状は未確認 → 書かない（240V表示の確認とType Iアダプターだけ）。
  * ⚠️ 滞在は3か月（6か月は英国旅券だけ）。
- * ⚠️ /ko/ に無いページ（customs-allowances, medicines 等）へはリンクしない。
+ * ⚠️ /ko/ に無いページへはリンクしない（customs-allowances, medicines は 2026-11-15 に ko-guides.ts で追加済み）。
+ * ⚠️ 2026-11-15 追加の major-airports / public-transport は確認日が別（CHECKED_NOV）。末尾の map は p.checked を優先する。
  */
 /** 2026-10-12 に公式で確認したページ群（表示の確認日） */
 const CHECKED = "2026년 10월 12일";
+/** 2026-11-15 に公式で確認したページ（major-airports / public-transport・英語版 CHECKED_NOV） */
+const CHECKED_NOV = "2026년 11월 15일";
 
 const RAW: LangPage[] = [
   {
@@ -33,6 +36,8 @@ const RAW: LangPage[] = [
           { href: "/ko/traveller-declaration/", label: "여행자 신고서(NZTD)" },
           { href: "/ko/egate-new-zealand/", label: "입국 심사 eGate" },
           { href: "/ko/biosecurity/", label: "생물검역" },
+          { href: "/ko/customs-allowances/", label: "세관 면세 범위" },
+          { href: "/ko/medicines/", label: "의약품 반입" },
         ],
       },
       { h2: "체류 중에" },
@@ -48,6 +53,8 @@ const RAW: LangPage[] = [
           { href: "/ko/healthcare-for-visitors/", label: "의료와 ACC" },
           { href: "/ko/driving-in-new-zealand/", label: "뉴질랜드에서 운전하기" },
           { href: "/ko/smoking-and-alcohol/", label: "흡연·전자담배·음주" },
+          { href: "/ko/major-airports/", label: "주요 국제공항" },
+          { href: "/ko/public-transport/", label: "대중교통" },
         ],
       },
     ],
@@ -849,6 +856,168 @@ const RAW: LangPage[] = [
       },
     ],
   },
+  /* ── 2026-11-15 追加（英語 pages-practical.ts の major-airports / public-transport）。
+        ⚠️ 英語版にないこと（オークランド空港の施設・SkyBus、AirportLink の運賃等）は書かない。 ── */
+  {
+    slug: "major-airports",
+    enSlug: "major-airports",
+    added: "2026-11-15",
+    checked: CHECKED_NOV,
+    nav: "주요 국제공항",
+    title: "뉴질랜드의 국제공항 — 오클랜드, 웰링턴, 크라이스트처치, 퀸스타운",
+    description:
+      "세관 eGate가 있는 네 공항에서 도착 후 거치는 절차와, 각 공항에서 시내까지 대중교통으로 가는 방법을 정리했습니다.",
+    related: ["public-transport", "egate-new-zealand", "traveller-declaration", "biosecurity"],
+    blocks: [
+      {
+        p: "뉴질랜드 세관은 오클랜드, 웰링턴, 크라이스트처치, 퀸스타운의 네 공항에서 입국과 출국 모두에 eGate를 운영합니다. 이 가운데 환승객을 처리하는 곳은 오클랜드뿐입니다.",
+      },
+      { h2: "도착하면" },
+      {
+        ul: [
+          "입국 심사대에 가기 전에 뉴질랜드 여행자 신고서(NZTD)를 작성하십시오. 세관에 따르면 신고서는 eGate에서 여권을 스캔하거나 국경 담당관이 여권을 확인할 때 자동으로 조회되므로 인쇄할 필요가 없습니다.",
+          "세관은 세관 검사, 수하물 수령, 생물검역을 통과하는 데 평소보다 시간이 더 걸릴 수 있고 대기 줄이 생기는 일이 흔하다고 안내합니다.",
+          "모든 국제선 도착 승객은 생물검역 위험 평가 검사를 받습니다.",
+        ],
+      },
+      { h2: "2027년 9월까지 eGate 교체 중" },
+      {
+        p: "세관은 2027년 9월까지 전국의 eGate를 교체하고 있으며, 이 때문에 대기 시간이 평소보다 길어질 수 있다고 밝혔습니다. 이 기간에 뉴질랜드를 출국한다면 출국 수속과 세관 통과에 시간을 넉넉히 잡아 두라고 세관은 강하게 권고합니다.",
+      },
+      { h2: "오클랜드" },
+      {
+        p: "오클랜드 국제공항은 뉴질랜드에서 환승할 수 있는 유일한 공항이며, 환승객은 환승 구역 안에 머물러야 합니다. 공항과 시내를 잇는 대중교통은 Auckland Transport가 운영합니다. 주황색 AirportLink 버스가 국제선 터미널의 A 정류장과 국내선 터미널의 B 정류장에서 출발합니다. 노선과 결제 방법은 이 사이트의 대중교통 페이지에서 설명합니다.",
+      },
+      { h2: "웰링턴" },
+      {
+        ul: [
+          "Airport Express 버스가 웰링턴 공항과 웰링턴 기차역 사이를 매일 운행합니다.",
+          "소요 시간은 교통 상황에 따라 약 25–35분입니다.",
+          "터미널 1층(Ground Floor)의 E 출입문(Door E)으로 나가 Airport Express 안내 표지를 따라가십시오.",
+          "웰링턴 공항에 따르면 Snapper 카드는 국제선 도착장 가까운 1층 E 출입문 옆 Snapper 키오스크에서 $10에 사거나 충전할 수 있습니다.",
+        ],
+      },
+      { h2: "크라이스트처치" },
+      {
+        ul: [
+          "버스는 국제선 도착장 북쪽 끝, 노보텔(Novotel) 호텔 옆에서 출발합니다(9번 출입문(Door 9)으로 나갑니다).",
+          "3번 버스는 공항에서 에이번헤드(Avonhead)와 시티 센터를 거쳐 섬너(Sumner)까지 운행합니다. 크라이스트처치 공항은 주중 10분 간격, 주말 15분 간격의 정기 노선이라고 설명합니다.",
+          "29번 버스는 펜달턴(Fendalton)을 거쳐 공항과 시내 사이를 매일 30분 간격으로 운행합니다.",
+        ],
+      },
+      { h2: "퀸스타운" },
+      {
+        ul: [
+          "국제선으로 도착하면 수하물을 찾기 전에 입국 심사를 받습니다.",
+          "공영 버스 정류장은 터미널 바로 밖에 있고 안내 표지가 잘 되어 있습니다. 버스는 도착장·출발장 근처에서 약 15분 간격으로 승객을 태웁니다.",
+        ],
+      },
+      { source: { label: "New Zealand Customs Service — eGate", url: "https://www.customs.govt.nz/travel-to-and-from-new-zealand/travel-by-air/egate" } },
+      { source: { label: "New Zealand Customs Service — Travel by air", url: "https://www.customs.govt.nz/travel-to-and-from-new-zealand/travel-by-air" } },
+      { source: { label: "Auckland Transport — Airport services", url: "https://at.govt.nz/bus-train-ferry/bus-services/airport-services" } },
+      { source: { label: "Wellington Airport — Airport Express bus", url: "https://www.wellingtonairport.co.nz/transport/airport-express-bus/" } },
+      { source: { label: "Christchurch Airport — Public transport", url: "https://www.christchurchairport.co.nz/travellers/parking-and-transport/public-transport/" } },
+      { source: { label: "Queenstown Airport — Arrivals guide", url: "https://www.queenstownairport.co.nz/at-the-airport/arrivals-guide/" } },
+      { source: { label: "Queenstown Airport — Public bus transport", url: "https://www.queenstownairport.co.nz/parking-transport/transport-options/public-bus-transport/" } },
+    ],
+  },
+  {
+    slug: "public-transport",
+    enSlug: "public-transport",
+    added: "2026-11-15",
+    checked: CHECKED_NOV,
+    nav: "대중교통",
+    title: "뉴질랜드의 대중교통 — 오클랜드, 웰링턴, 크라이스트처치, 퀸스타운",
+    description:
+      "도시별 버스·기차 요금 내는 방법, 공항 연결 교통, 요금 상한, 인터아일랜더 페리를 각 교통 운영사의 공식 페이지를 바탕으로 정리했습니다.",
+    related: ["major-airports", "driving-in-new-zealand", "money-and-tipping", "phones-and-sim-cards"],
+    blocks: [
+      {
+        p: "뉴질랜드의 대중교통은 지역마다 따로 운영되며 교통카드도 지역마다 다릅니다. 여러 도시에서 비접촉식 은행 카드를 받지만 규칙은 지역마다 다릅니다. 아래는 각 운영사가 안내하는 내용입니다.",
+      },
+      { h2: "오클랜드: 공항에서 이동하기" },
+      {
+        ul: [
+          "주황색 AirportLink 버스가 오클랜드 공항, 푸히누이(Puhinui)역, 마누카우(Manukau) 버스 정류장 사이를 운행합니다.",
+          "푸히누이역에서는 매일 오전 4시 30분부터 오전 0시 40분까지 10분 간격으로 운행합니다.",
+          "푸히누이역에서 국제선 터미널까지는 18–20분, 국내선 터미널까지는 13–17분이 걸립니다.",
+          "푸히누이역에서는 East West선과 South City선 열차가 Karanga-a-Hape, Te Waihorotiu, Waitematā 역으로 갑니다.",
+          "또는 38번 버스가 망게레 타운 센터(Māngere Town Centre)를 거쳐 공항과 오네훙가(Onehunga) 사이를 운행합니다. 오네훙가에서 공항까지 30–35분이 걸립니다.",
+          "공사로 열차가 운행하지 않을 때는 푸히누이까지 열차 대체 버스를 타야 합니다.",
+        ],
+      },
+      { h2: "오클랜드: 요금 내는 방법" },
+      {
+        p: "Auckland Transport에서는 AT HOP 카드, 비접촉식 직불·신용카드(Visa, Mastercard, American Express, UnionPay), 또는 스마트 기기로 요금을 낼 수 있습니다.",
+      },
+      {
+        ul: [
+          "AT HOP 카드는 창구에서 사면 $5(구입 시 최소 $1 충전), 자동판매기에서 사면 $20의 충전 금액을 포함해 $25입니다. 오클랜드 공항의 국내선·국제선 터미널에서 판매합니다.",
+          "비접촉식 결제에는 성인 HOP 요금이 적용됩니다.",
+          "비접촉식 카드나 기기는 한 사람이 하나씩 써서 각자 태그해야 합니다. 비접촉식으로 다른 사람의 요금을 대신 낼 수 없습니다.",
+          "AT HOP 카드를 쓰면 7일 동안 $50 넘게 내지 않습니다. 이 7일 요금 상한은 비접촉식 결제에는 적용되지 않으며, 대신 하루 $20의 요금 상한이 적용됩니다.",
+          "환승할 때는 이전 노선에서 태그 오프한 뒤 30분 안에 태그 온하고, 전체 이동을 4시간 안에 마쳐야 합니다.",
+          "Fullers360의 와이헤케(Waiheke) 노선과 관광용 페리는 비접촉식 결제 대상이 아닙니다.",
+          "종이 승차권은 열차와 페리에서만 살 수 있고 버스에서는 살 수 없습니다.",
+          "하루 비접촉식 이용 금액이 $35를 넘으면 은행 명세서에 2건으로 나뉘어 표시될 수 있습니다.",
+        ],
+      },
+      { h2: "웰링턴: Airport Express" },
+      {
+        ul: [
+          "Metlink의 Airport Express(AX)는 매일 운행하며, 아침과 저녁의 처음 몇 편을 제외하고 10–20분 간격입니다.",
+          "웰링턴역에서 공항까지 약 25–35분이 걸립니다.",
+          "요금은 차내에서 Snapper, 현금, 비접촉식 결제로 냅니다.",
+          "성인 요금: 현금·비접촉식 $12.00, Snapper 카드 $9.23. 어린이 요금: 현금·비접촉식 $6.00, Snapper 카드 $4.62.",
+          "Airport Express에는 별도의 비접촉식 결제 시스템이 있습니다. 탈 때 버스 앞쪽 단말기에 한 번만 대면 되고, 내릴 때 태그할 필요는 없습니다.",
+          "비혼잡 시간대 할인과 무료 환승은 Airport Express에는 적용되지 않습니다.",
+          "Snapper 카드 한 장으로 최대 5명까지 태그해 탈 수 있습니다.",
+        ],
+      },
+      {
+        p: "Metlink는 해외에서 발급된 SuperGold 카드 상당의 경로 우대 카드로는 비혼잡 시간대 무료 요금을 받을 수 없다고 안내합니다.",
+      },
+      { h2: "크라이스트처치: Motu Move" },
+      {
+        ul: [
+          "크라이스트처치, 셀윈(Selwyn), 와이마카리리(Waimakariri)의 Metro 버스와 페리는 결제와 승차권에 Motu Move를 사용합니다.",
+          "Apple Pay와 Google Pay를 포함한 신용·직불카드로 비접촉식 결제를 할 수 있지만, 카드나 기기 하나당 한 사람만 결제할 수 있습니다.",
+          "크라이스트처치 밖에 있다면 Motu Move 카드를 온라인으로 주문할 수 있으며, 카드 한 장에 $10, 최소 충전액은 $5입니다.",
+          "Motu Move의 모든 결제 방법에 요금 상한이 적용되고, 2시간 안에 최대 두 번까지 무료로 환승할 수 있습니다.",
+        ],
+      },
+      {
+        note: "크라이스트처치 공항은 Metro 버스에서 아직 Metrocard와 현금을 받지만 2026년 11월 23일에 폐지된다고 안내합니다. 그날부터는 Metro 요금을 Metrocard나 현금으로 낼 수 없습니다.",
+      },
+      { h2: "퀸스타운: Orbus와 Bee Card" },
+      {
+        ul: [
+          "Orbus 노선망은 오타고 지방 의회(Otago Regional Council)가 운영합니다.",
+          "등록한 Bee Card를 쓰면 요금이 가장 저렴하며, 차내에서 현금도 받습니다.",
+          "등록하지 않은 카드에는 성인 요금이 적용됩니다.",
+          "Bee Card는 온라인, 공항 터미널의 PaperPlus 매장, 또는 영업시간 중 프랭크턴(Frankton)의 오타고 지방 의회 사무소에서 살 수 있습니다.",
+          "같은 Bee Card로 45분 안에 버스를 갈아타면 한 번 무료로 환승할 수 있습니다.",
+        ],
+      },
+      { h2: "섬과 섬 사이, 그리고 철도" },
+      {
+        p: "KiwiRail의 Great Journeys New Zealand는 웰링턴과 픽턴(Picton) 사이 쿡 해협을 건너는 인터아일랜더(Interislander) 페리를 운항합니다. 거리는 93킬로미터(58마일), 소요 시간은 3시간 30분입니다. 철도는 노던 익스플로러(Northern Explorer, 오클랜드–웰링턴), 트랜즈알파인(TranzAlpine, 크라이스트처치–그레이마우스), 코스탈 퍼시픽(Coastal Pacific, 크라이스트처치–픽턴)의 세 노선을 운행합니다.",
+      },
+      {
+        note: "요금, 시간표, 운행 변경은 각 운영사가 공개합니다. 이용하는 날에 해당 운영사의 공식 페이지를 확인하십시오.",
+      },
+      { source: { label: "Auckland Transport — Airport services", url: "https://at.govt.nz/bus-train-ferry/bus-services/airport-services" } },
+      { source: { label: "Auckland Transport — Buy an AT HOP card", url: "https://at.govt.nz/bus-train-ferry/at-hop-card/buy-at-hop-card" } },
+      { source: { label: "Auckland Transport — Using contactless payments", url: "https://at.govt.nz/bus-train-ferry/contactless-payments/using-contactless-payments-on-auckland-public-transport" } },
+      { source: { label: "Auckland Transport — 7-day fare cap", url: "https://at.govt.nz/bus-train-ferry/at-hop-card/7-day-fare-cap-for-auckland-public-transport" } },
+      { source: { label: "Auckland Transport — Visitors' guide to public transport", url: "https://at.govt.nz/bus-train-ferry/visitors-guide-to-public-transport-in-auckland" } },
+      { source: { label: "Metlink — Airport Express", url: "https://www.metlink.org.nz/getting-started/airport-express" } },
+      { source: { label: "Christchurch Airport — Public transport", url: "https://www.christchurchairport.co.nz/travellers/parking-and-transport/public-transport/" } },
+      { source: { label: "Queenstown Airport — Public bus transport", url: "https://www.queenstownairport.co.nz/parking-transport/transport-options/public-bus-transport/" } },
+      { source: { label: "Great Journeys New Zealand — Interislander Cook Strait crossing", url: "https://www.greatjourneysnz.com/routes/interislander-cook-strait-crossing/" } },
+      { source: { label: "Great Journeys New Zealand", url: "https://www.greatjourneysnz.com/" } },
+    ],
+  },
 ];
 
-export const KO_PRACTICAL: LangPage[] = RAW.map((p) => ({ ...p, checked: CHECKED }));
+export const KO_PRACTICAL: LangPage[] = RAW.map((p) => ({ ...p, checked: p.checked ?? CHECKED }));

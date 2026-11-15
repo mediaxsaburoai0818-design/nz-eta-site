@@ -12,6 +12,8 @@ import type { LangPage } from "./_schema";
  */
 /** 2026-10-12 に公式で確認したページ群（表示の確認日） */
 const CHECKED = "12. Oktober 2026";
+/** 2026-11-15 に公式で確認したページ（flughaefen-neuseeland / oeffentliche-verkehrsmittel = 英語 major-airports / public-transport） */
+const CHECKED_NOV = "15. November 2026";
 
 const RAW: LangPage[] = [
   /* ── Hub ── */
@@ -33,6 +35,8 @@ const RAW: LangPage[] = [
           { href: "/de/einreiseerklaerung/", label: "Einreiseerklärung (NZTD)" },
           { href: "/de/egate-neuseeland/", label: "eGate bei der Einreise" },
           { href: "/de/biosicherheit/", label: "Biosicherheit" },
+          { href: "/de/zollfreimengen/", label: "Zollfreimengen" },
+          { href: "/de/medikamente-mitnehmen/", label: "Medikamente mitnehmen" },
         ],
       },
       { h2: "Während Ihres Aufenthalts" },
@@ -48,6 +52,8 @@ const RAW: LangPage[] = [
           { href: "/de/gesundheitsversorgung/", label: "Gesundheit und ACC" },
           { href: "/de/autofahren-in-neuseeland/", label: "Autofahren in Neuseeland" },
           { href: "/de/rauchen-und-alkohol/", label: "Rauchen, Vapen und Alkohol" },
+          { href: "/de/flughaefen-neuseeland/", label: "Internationale Flughäfen" },
+          { href: "/de/oeffentliche-verkehrsmittel/", label: "Öffentliche Verkehrsmittel" },
         ],
       },
     ],
@@ -871,6 +877,171 @@ const RAW: LangPage[] = [
       },
     ],
   },
+
+  /* ── 2026-11-15 追加（英語 major-airports / public-transport・確認日 15 November 2026）。
+        ⚠️ 英語版と同じく、オークランド空港の施設・SkyBus、AirportLink の運賃、
+           クライストチャーチ・クイーンズタウンの運賃額は書かない（未確認）。 ── */
+  {
+    slug: "flughaefen-neuseeland",
+    enSlug: "major-airports",
+    added: "2026-11-15",
+    checked: CHECKED_NOV,
+    nav: "Internationale Flughäfen",
+    title: "Die internationalen Flughäfen Neuseelands: Auckland, Wellington, Christchurch und Queenstown",
+    description:
+      "Die vier Flughäfen mit eGates des Zolls, was bei der Ankunft passiert und wie Sie von jedem Flughafen mit öffentlichen Verkehrsmitteln in die Stadt kommen.",
+    related: ["oeffentliche-verkehrsmittel", "egate-neuseeland", "einreiseerklaerung", "biosicherheit"],
+    blocks: [
+      {
+        p: `New Zealand Customs betreibt an vier Flughäfen eGates — Auckland, Wellington, Christchurch und Queenstown —, sowohl für ankommende als auch für abreisende Reisende. Von diesen vier wickelt nur Auckland Transitpassagiere ab.`,
+      },
+      { h2: "Bei der Ankunft" },
+      {
+        ul: [
+          `Füllen Sie die New Zealand Traveller Declaration (NZTD) aus, bevor Sie die Passkontrolle erreichen. Laut Zoll wird sie automatisch geprüft, wenn Sie Ihren Pass am eGate scannen oder ein Grenzbeamter Ihren Pass kontrolliert; ausdrucken müssen Sie nichts.`,
+          `Der Zoll weist darauf hin, dass Zollkontrolle, Gepäckausgabe und Biosicherheitskontrolle länger als üblich dauern können und Warteschlangen häufig sind.`,
+          `Alle internationalen Ankünfte durchlaufen eine Risikoprüfung der Biosicherheit.`,
+        ],
+      },
+      { h2: "eGates werden bis September 2027 ersetzt" },
+      {
+        p: `Der Zoll ersetzt bis September 2027 landesweit die eGates und weist darauf hin, dass es dadurch zu längeren Wartezeiten als üblich kommen kann. Wer in diesem Zeitraum aus Neuseeland ausreist, soll laut Zoll unbedingt zusätzliche Zeit für Abflug und Zollabfertigung einplanen.`,
+      },
+      { h2: "Auckland" },
+      {
+        p: `Der Auckland International Airport ist der einzige Flughafen, über den Sie durch Neuseeland transitieren können, und Transitpassagiere müssen im Transitbereich bleiben. Den öffentlichen Verkehr zwischen Flughafen und Stadt betreibt Auckland Transport: Der orangefarbene AirportLink-Bus fährt am internationalen Terminal an der Haltestelle A und am Inlandsterminal an der Haltestelle B ab. Strecken und Bezahlung erklärt unsere Seite zu den öffentlichen Verkehrsmitteln.`,
+      },
+      { h2: "Wellington" },
+      {
+        ul: [
+          `Der Airport Express fährt an sieben Tagen pro Woche zwischen dem Flughafen Wellington und dem Hauptbahnhof (Wellington Railway Station).`,
+          `Die Fahrt dauert je nach Verkehr etwa 25–35 Minuten.`,
+          `Verlassen Sie das Terminal im Erdgeschoss durch Tür E und folgen Sie der Beschilderung zum Airport Express.`,
+          `Laut Wellington Airport können Sie Snapper-Karten für NZ$10 am Snapper-Kiosk im Erdgeschoss bei Tür E (nahe International Arrivals) kaufen oder dort aufladen.`,
+        ],
+      },
+      { h2: "Christchurch" },
+      {
+        ul: [
+          `Die Busse fahren am nördlichen Ende von International Arrivals neben dem Novotel ab (Ausgang durch Tür 9).`,
+          `Linie 3 fährt vom Flughafen über Avonhead und das Stadtzentrum nach Sumner. Christchurch Airport beschreibt sie als regelmäßige Verbindung alle 10 Minuten unter der Woche und alle 15 Minuten am Wochenende.`,
+          `Linie 29 fährt vom Flughafen über Fendalton in die Stadt, alle 30 Minuten an sieben Tagen pro Woche.`,
+        ],
+      },
+      { h2: "Queenstown" },
+      {
+        ul: [
+          `Bei einer internationalen Ankunft gehen Sie zuerst durch die Passkontrolle und holen dann Ihr Gepäck.`,
+          `Die Haltestellen der öffentlichen Busse liegen vor dem Terminal und sind gut ausgeschildert; die Busse halten etwa alle 15 Minuten nahe dem Ankunfts- und Abflugbereich.`,
+        ],
+      },
+      { source: { label: "New Zealand Customs Service — eGate", url: "https://www.customs.govt.nz/travel-to-and-from-new-zealand/travel-by-air/egate" } },
+      { source: { label: "New Zealand Customs Service — Travel by air", url: "https://www.customs.govt.nz/travel-to-and-from-new-zealand/travel-by-air" } },
+      { source: { label: "Auckland Transport — Airport services", url: "https://at.govt.nz/bus-train-ferry/bus-services/airport-services" } },
+      { source: { label: "Wellington Airport — Airport Express bus", url: "https://www.wellingtonairport.co.nz/transport/airport-express-bus/" } },
+      { source: { label: "Christchurch Airport — Public transport", url: "https://www.christchurchairport.co.nz/travellers/parking-and-transport/public-transport/" } },
+      { source: { label: "Queenstown Airport — Arrivals guide", url: "https://www.queenstownairport.co.nz/at-the-airport/arrivals-guide/" } },
+      { source: { label: "Queenstown Airport — Public bus transport", url: "https://www.queenstownairport.co.nz/parking-transport/transport-options/public-bus-transport/" } },
+    ],
+  },
+
+  {
+    slug: "oeffentliche-verkehrsmittel",
+    enSlug: "public-transport",
+    added: "2026-11-15",
+    checked: CHECKED_NOV,
+    nav: "Öffentliche Verkehrsmittel",
+    title: "Öffentliche Verkehrsmittel in Neuseeland: Auckland, Wellington, Christchurch und Queenstown",
+    description:
+      "Wie Besucher in jeder Stadt Bus und Bahn bezahlen, Flughafenverbindungen, Tarifobergrenzen und die Interislander-Fähre — nach Angaben der Verkehrsbetriebe.",
+    related: ["flughaefen-neuseeland", "autofahren-in-neuseeland", "geld-und-trinkgeld", "handy-und-sim-karte"],
+    blocks: [
+      {
+        p: `Jede Region betreibt ihren eigenen öffentlichen Verkehr mit eigener Karte. In mehreren Städten können Sie kontaktlos mit der Bankkarte zahlen, die Regeln unterscheiden sich aber von Ort zu Ort. Im Folgenden steht, was die jeweiligen Betreiber angeben.`,
+      },
+      { h2: "Auckland: vom Flughafen in die Stadt" },
+      {
+        ul: [
+          `Der orangefarbene AirportLink-Bus verbindet den Flughafen Auckland mit der Puhinui Station und der Manukau Bus Station.`,
+          `Ab Puhinui Station fährt er alle 10 Minuten von 4:30 bis 0:40 Uhr, an sieben Tagen pro Woche.`,
+          `Von der Puhinui Station zum internationalen Terminal dauert es 18 bis 20 Minuten, zum Inlandsterminal 13 bis 17 Minuten.`,
+          `In Puhinui fahren Züge der East West Line und der South City Line nach Karanga-a-Hape, Te Waihorotiu und Waitematā.`,
+          `Alternativ fährt Linie 38 zwischen Flughafen und Onehunga über das Māngere Town Centre; von Onehunga zum Flughafen dauert es 30 bis 35 Minuten.`,
+          `Wenn wegen Bauarbeiten keine Züge fahren, nehmen Sie einen Schienenersatzbus nach Puhinui.`,
+        ],
+      },
+      { h2: "Auckland: bezahlen" },
+      {
+        p: `Auckland Transport akzeptiert die AT-HOP-Karte, kontaktlose Debit- oder Kreditkarten (Visa, Mastercard, American Express, UnionPay) oder ein Smartphone bzw. eine Smartwatch.`,
+      },
+      {
+        ul: [
+          `Eine AT-HOP-Karte kostet persönlich gekauft NZ$5 (mit mindestens NZ$1 Aufladung beim Kauf) oder am Automaten NZ$25 einschließlich NZ$20 Guthaben. Sie wird am Inlands- und am internationalen Terminal des Flughafens Auckland verkauft.`,
+          `Kontaktlose Zahlungen werden zum HOP-Tarif für Erwachsene abgerechnet.`,
+          `Jede Person muss mit der eigenen kontaktlosen Karte oder dem eigenen Gerät ein- und auschecken; für andere kann man kontaktlos nicht mitbezahlen.`,
+          `Mit der AT-HOP-Karte zahlen Sie innerhalb von 7 Tagen höchstens NZ$50. Bei kontaktloser Zahlung gibt es diese 7-Tage-Obergrenze nicht, stattdessen eine Tagesobergrenze von NZ$20.`,
+          `Beim Umsteigen müssen Sie innerhalb von 30 Minuten nach dem Auschecken wieder einchecken und die Fahrt innerhalb von 4 Stunden beenden.`,
+          `Fullers360 nach Waiheke und touristische Fähren sind von der kontaktlosen Zahlung ausgenommen.`,
+          `Papiertickets gibt es nur für Züge und Fähren, nicht für Busse.`,
+          `Liegen Ihre kontaktlosen Fahrten an einem Tag über NZ$35, können sie auf dem Kontoauszug als 2 Buchungen erscheinen.`,
+        ],
+      },
+      { h2: "Wellington: Airport Express" },
+      {
+        ul: [
+          `Der Airport Express (AX) von Metlink fährt an sieben Tagen pro Woche alle 10–20 Minuten, mit Ausnahme der ersten Fahrten morgens und abends.`,
+          `Vom Bahnhof Wellington zum Flughafen dauert es etwa 25–35 Minuten.`,
+          `Bezahlt wird an Bord mit Snapper, bar oder kontaktlos.`,
+          `Erwachsene: NZ$12,00 bar oder kontaktlos, NZ$9,23 mit Snapper-Karte. Kinder: NZ$6,00 bar oder kontaktlos, NZ$4,62 mit Snapper-Karte.`,
+          `Der Airport Express hat ein eigenes Kontaktlos-System: Halten Sie beim Einsteigen Ihre Karte einmal an das Terminal vorne im Bus; auschecken müssen Sie nicht.`,
+          `Rabatte außerhalb der Stoßzeiten und kostenloses Umsteigen gelten für den Airport Express nicht.`,
+          `Mit einer Snapper-Karte können bis zu 5 Personen einchecken.`,
+        ],
+      },
+      {
+        p: `Metlink weist darauf hin, dass ausländische Entsprechungen der SuperGold-Karte nicht zu kostenlosen Fahrten außerhalb der Stoßzeiten berechtigen.`,
+      },
+      { h2: "Christchurch: Motu Move" },
+      {
+        ul: [
+          `Metro-Busse und -Fähren in Christchurch, Selwyn und Waimakariri nutzen Motu Move für Bezahlung und Tickets.`,
+          `Sie können kontaktlos mit Kredit- oder Debitkarte zahlen, auch mit Apple Pay und Google Pay — aber nur für eine Person pro Karte oder Gerät.`,
+          `Wenn Sie nicht in Christchurch sind, können Sie Motu-Move-Karten online für NZ$10 pro Karte bestellen, mit einer Mindestaufladung von NZ$5.`,
+          `Alle Zahlungsarten von Motu Move unterstützen Tarifobergrenzen und bis zu zwei kostenlose Umstiege innerhalb von 2 Stunden.`,
+        ],
+      },
+      {
+        note: `Laut Christchurch Airport werden Metrocards und Bargeld in den Metro-Bussen noch angenommen, aber am 23. November 2026 abgeschafft. Ab diesem Datum können Sie Metro-Fahrten nicht mehr mit Metrocard oder bar bezahlen.`,
+      },
+      { h2: "Queenstown: Orbus und die Bee Card" },
+      {
+        ul: [
+          `Das Orbus-Netz wird vom Otago Regional Council betrieben.`,
+          `Eine registrierte Bee Card bietet die günstigsten Tarife; an Bord wird auch Bargeld angenommen.`,
+          `Für nicht registrierte Karten gilt der Erwachsenentarif.`,
+          `Eine Bee Card bekommen Sie online, im PaperPlus-Geschäft im Flughafenterminal oder während der Geschäftszeiten im Büro des Otago Regional Council in Frankton.`,
+          `Wer innerhalb von 45 Minuten mit derselben Bee Card umsteigt, hat einen Umstieg frei.`,
+        ],
+      },
+      { h2: "Zwischen den Inseln und mit der Bahn" },
+      {
+        p: `Great Journeys New Zealand von KiwiRail betreibt die Interislander-Fähre über die Cookstraße zwischen Wellington und Picton — eine Überfahrt von 93 Kilometern, die dreieinhalb Stunden dauert — sowie drei Bahnstrecken: den Northern Explorer (Auckland–Wellington), den TranzAlpine (Christchurch–Greymouth) und den Coastal Pacific (Christchurch–Picton).`,
+      },
+      {
+        note: `Fahrpreise, Fahrpläne und Änderungen veröffentlicht jeder Betreiber selbst. Prüfen Sie für Ihren Reisetag die Seite des jeweiligen Betreibers.`,
+      },
+      { source: { label: "Auckland Transport — Airport services", url: "https://at.govt.nz/bus-train-ferry/bus-services/airport-services" } },
+      { source: { label: "Auckland Transport — Buy an AT HOP card", url: "https://at.govt.nz/bus-train-ferry/at-hop-card/buy-at-hop-card" } },
+      { source: { label: "Auckland Transport — Using contactless payments", url: "https://at.govt.nz/bus-train-ferry/contactless-payments/using-contactless-payments-on-auckland-public-transport" } },
+      { source: { label: "Auckland Transport — 7-day fare cap", url: "https://at.govt.nz/bus-train-ferry/at-hop-card/7-day-fare-cap-for-auckland-public-transport" } },
+      { source: { label: "Auckland Transport — Visitors' guide to public transport", url: "https://at.govt.nz/bus-train-ferry/visitors-guide-to-public-transport-in-auckland" } },
+      { source: { label: "Metlink — Airport Express", url: "https://www.metlink.org.nz/getting-started/airport-express" } },
+      { source: { label: "Christchurch Airport — Public transport", url: "https://www.christchurchairport.co.nz/travellers/parking-and-transport/public-transport/" } },
+      { source: { label: "Queenstown Airport — Public bus transport", url: "https://www.queenstownairport.co.nz/parking-transport/transport-options/public-bus-transport/" } },
+      { source: { label: "Great Journeys New Zealand — Interislander Cook Strait crossing", url: "https://www.greatjourneysnz.com/routes/interislander-cook-strait-crossing/" } },
+      { source: { label: "Great Journeys New Zealand", url: "https://www.greatjourneysnz.com/" } },
+    ],
+  },
 ];
 
-export const DE_PRACTICAL: LangPage[] = RAW.map((p) => ({ ...p, checked: CHECKED }));
+export const DE_PRACTICAL: LangPage[] = RAW.map((p) => ({ ...p, checked: p.checked ?? CHECKED }));
