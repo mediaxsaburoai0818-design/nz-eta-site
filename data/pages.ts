@@ -91,7 +91,7 @@ export const PAGES: Page[] = [
     nav: "How to apply",
     title: "How to apply for an NZeTA, step by step",
     description:
-      `Applying takes about ten minutes in the official app (${F.feeApp}) or on the Immigration NZ website (${F.feeWeb}). The steps in order, and what trips people up.`,
+      `Apply in the official app (${F.feeApp}), which MBIE says takes less than 5 minutes, or on the Immigration NZ website (${F.feeWeb}). The steps, and what trips people up.`,
     blocks: [
       {
         p: `There are exactly two official channels: the NZeTA app and the Immigration New Zealand website. The app costs ${F.feeApp} and the website ${F.feeWeb} — the same authorisation either way.`,
