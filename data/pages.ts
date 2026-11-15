@@ -1,5 +1,6 @@
 import { FACTS as F } from "@/data/facts";
 import { HUB_PAGE, PRACTICAL_PAGES } from "@/data/pages-practical";
+import { GUIDE_PAGES } from "@/data/pages-guides";
 
 /**
  * 英語（ルート）の下層ページ。uketa（eta-se.com）の言語ディレクトリと同じ13本構成に合わせる。
@@ -90,6 +91,7 @@ export const PAGES: Page[] = [
     slug: "how-to-apply",
     nav: "How to apply",
     title: "How to apply for an NZeTA, step by step",
+    related: ["nzeta-app", "official-website", "common-mistakes", "cost", "required-documents", "processing-time"],
     description:
       `Apply in the official app (${F.feeApp}), which MBIE says takes less than 5 minutes, or on the Immigration NZ website (${F.feeWeb}). The steps, and what trips people up.`,
     blocks: [
@@ -1008,6 +1010,8 @@ export const PAGES: Page[] = [
           },
     ],
   },
+  // 補足ページ（data/pages-guides.ts・2026-11-15）
+  ...GUIDE_PAGES,
   // 入国後の実用ページ（data/pages-practical.ts）
   HUB_PAGE,
   ...PRACTICAL_PAGES,

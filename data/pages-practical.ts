@@ -17,6 +17,8 @@ export const HUB_SLUG = "arriving-in-new-zealand";
 
 /** 2026-10-12 に公式で確認したページ群（表示の確認日） */
 const CHECKED = "12 October 2026";
+/** 2026-11-15 に公式で確認したページ（major-airports / public-transport） */
+const CHECKED_NOV = "15 November 2026";
 
 const RAW: Page[] = [
   {
@@ -24,7 +26,7 @@ const RAW: Page[] = [
     nav: "eGate at the border",
     title: `New Zealand eGate: who can use it (age ${F.egateMinAge}+, ${F.egateCountries} passports)`,
     description: `eGates at Auckland, Wellington, Christchurch and Queenstown take ePassports from ${F.egateCountries} countries and territories, age ${F.egateMinAge} and over. The NZTD is still required.`,
-    related: ["traveller-declaration", "biosecurity", "customs-allowances", "children-and-infants"],
+    related: ["traveller-declaration", "biosecurity", "customs-allowances", "children-and-infants", "major-airports", "news"],
     blocks: [
       {
         p: `New Zealand Customs runs automated eGates at four airports — Auckland, Wellington, Christchurch and Queenstown — for both arrivals and departures. The gate scans your ePassport and uses biometrics to match your face with the photo in it.`,
@@ -801,9 +803,166 @@ const RAW: Page[] = [
       },
     ],
   },
+  /* ── 2026-11-15 追加（facts＝~/projects/eta-expansion-20261115/facts-nz.md）。
+        ⚠️ aucklandairport.co.nz は読めなかった（403）。オークランド空港の施設・乗り継ぎ・SkyBus 等は書かない。
+        ⚠️ AirportLink の運賃、クライストチャーチ・クイーンズタウンの運賃額は未確認なので書かない。 ── */
+  {
+    slug: "major-airports",
+    nav: "Major airports",
+    title: "New Zealand's international airports: Auckland, Wellington, Christchurch and Queenstown",
+    description: "The four airports with Customs eGates, what happens on arrival, and how to get from each airport into town by public transport.",
+    related: ["public-transport", "egate-new-zealand", "traveller-declaration", "biosecurity", "transit"],
+    checked: CHECKED_NOV,
+    blocks: [
+      {
+        p: "New Zealand Customs has eGates at four airports — Auckland, Wellington, Christchurch and Queenstown — for both arriving and departing travellers. Of these, only Auckland handles transit passengers.",
+      },
+      { h2: "On arrival" },
+      {
+        ul: [
+          "Complete the New Zealand Traveller Declaration (NZTD) before you reach passport control. Customs says it is checked automatically when you scan your passport at the eGate or when a border officer checks your passport, and you do not need to print anything",
+          "Customs warns that it may take longer than usual to get through Customs, baggage collection and biosecurity, and that queues are common",
+          "Biosecurity risk assessment checks apply to all international arrivals",
+        ],
+      },
+      { h2: "eGates are being replaced until September 2027" },
+      {
+        p: "Customs is replacing eGates across the country through to September 2027 and says this may mean longer than normal queue times. If you are leaving New Zealand during this period, Customs strongly encourages you to allow additional time for departure and Customs clearance.",
+      },
+      { h2: "Auckland" },
+      {
+        p: "Auckland International Airport is the only airport where you can transit New Zealand, and transit passengers must stay in the transit area. Public transport between the airport and the city is run by Auckland Transport: the orange AirportLink bus leaves from bus stop A at the international terminal and bus stop B at the domestic terminal. Routes and payment are covered on our public transport page.",
+      },
+      { h2: "Wellington" },
+      {
+        ul: [
+          "The Airport Express bus runs between Wellington Airport and Wellington Railway Station, seven days a week",
+          "Travel time is around 25–35 minutes depending on traffic",
+          "Leave the terminal from the Ground Floor through Door E and follow the signs to the Airport Express",
+          "Wellington Airport says Snapper cards can be bought for $10 or topped up at the Snapper Kiosk on the Ground Floor by Door E, near International Arrivals",
+        ],
+      },
+      { h2: "Christchurch" },
+      {
+        ul: [
+          "Buses depart from the northern end of International Arrivals, next to the Novotel hotel (exit through Door 9)",
+          "Bus 3 runs from the airport to Sumner via Avonhead and the City Centre. Christchurch Airport describes it as a regular service every 10 minutes all week, and every 15 minutes on weekends",
+          "Bus 29 runs from the airport to the city via Fendalton every 30 minutes, seven days a week",
+        ],
+      },
+      { h2: "Queenstown" },
+      {
+        ul: [
+          "On an international arrival you go through passport control before collecting your bags",
+          "Public bus stops are outside the terminal and clearly signposted; services pick up close to the arrivals and departures area approximately every 15 minutes",
+        ],
+      },
+      { source: { label: "New Zealand Customs Service — eGate", url: "https://www.customs.govt.nz/travel-to-and-from-new-zealand/travel-by-air/egate" } },
+      { source: { label: "New Zealand Customs Service — Travel by air", url: "https://www.customs.govt.nz/travel-to-and-from-new-zealand/travel-by-air" } },
+      { source: { label: "Auckland Transport — Airport services", url: "https://at.govt.nz/bus-train-ferry/bus-services/airport-services" } },
+      { source: { label: "Wellington Airport — Airport Express bus", url: "https://www.wellingtonairport.co.nz/transport/airport-express-bus/" } },
+      { source: { label: "Christchurch Airport — Public transport", url: "https://www.christchurchairport.co.nz/travellers/parking-and-transport/public-transport/" } },
+      { source: { label: "Queenstown Airport — Arrivals guide", url: "https://www.queenstownairport.co.nz/at-the-airport/arrivals-guide/" } },
+      { source: { label: "Queenstown Airport — Public bus transport", url: "https://www.queenstownairport.co.nz/parking-transport/transport-options/public-bus-transport/" } },
+    ],
+  },
+  {
+    slug: "public-transport",
+    nav: "Public transport",
+    title: "Public transport in New Zealand: Auckland, Wellington, Christchurch and Queenstown",
+    description: "How visitors pay for buses and trains in each city, airport links, fare caps, and the Interislander ferry — from the transport operators' own pages.",
+    related: ["major-airports", "driving-in-new-zealand", "money-and-tipping", "phones-and-sim-cards"],
+    checked: CHECKED_NOV,
+    blocks: [
+      {
+        p: "Each region runs its own public transport with its own card. Contactless bank cards are accepted in several cities, but the rules differ from place to place. Below is what each operator says.",
+      },
+      { h2: "Auckland: getting from the airport" },
+      {
+        ul: [
+          "The orange AirportLink bus carries passengers between Auckland Airport, Puhinui Station and Manukau Bus Station",
+          "From Puhinui Station it runs every 10 minutes from 4:30am to 12:40am, 7 days a week",
+          "Puhinui Station to the international terminal takes 18 to 20 minutes; to the domestic terminal, 13 to 17 minutes",
+          "At Puhinui, trains on the East West line and South City line run to Karanga-a-Hape, Te Waihorotiu and Waitematā",
+          "Alternatively, bus 38 runs between the airport and Onehunga via Māngere Town Centre; the trip from Onehunga to the airport takes 30 to 35 minutes",
+          "When works stop trains running, you need to take a rail replacement bus to Puhinui",
+        ],
+      },
+      { h2: "Auckland: paying" },
+      {
+        p: "Auckland Transport accepts an AT HOP card, a contactless debit or credit card (Visa, Mastercard, American Express, UnionPay), or a smart device.",
+      },
+      {
+        ul: [
+          "An AT HOP card costs $5 in person (with a minimum $1 top-up at purchase), or $25 from a vending machine including $20 credit. It is sold at Auckland Airport's domestic and international terminals",
+          "Contactless payments are charged at the adult HOP fare rate",
+          "Each person must tag on and off with their own contactless card or device; you cannot pay for someone else by contactless",
+          "With an AT HOP card you won't spend more than $50 per 7-day period. The 7-day cap is not available with contactless, which gets a $20 daily fare cap instead",
+          "When transferring, tag on within 30 minutes of tagging off your previous service and complete your journey within 4 hours",
+          "Fullers360 Waiheke and tourist ferry services are excluded from contactless payments",
+          "Paper tickets are available only on train and ferry services, not on buses",
+          "If your contactless travel for the day totals more than $35, it may appear as 2 transactions on your bank statement",
+        ],
+      },
+      { h2: "Wellington: Airport Express" },
+      {
+        ul: [
+          "Metlink's Airport Express (AX) runs 7 days a week, every 10–20 minutes, except for the first few morning and evening services",
+          "Wellington Station to the airport takes approximately 25–35 minutes",
+          "Fares are paid on board with Snapper, cash or contactless payment",
+          "Adult fare: $12.00 by cash or contactless, $9.23 with a Snapper card. Child fare: $6.00 by cash or contactless, $4.62 with a Snapper card",
+          "The Airport Express has its own contactless system: tap once on the terminal at the front of the bus when you board; you do not need to tag off",
+          "Off-peak discounts and free transfers do not apply to the Airport Express",
+          "Up to 5 people can be tagged on with one Snapper card",
+        ],
+      },
+      {
+        p: "Metlink notes that overseas equivalents of the SuperGold card are not eligible for free off-peak fares.",
+      },
+      { h2: "Christchurch: Motu Move" },
+      {
+        ul: [
+          "Metro buses and ferries in Christchurch, Selwyn and Waimakariri use Motu Move for payments and ticketing",
+          "You can pay contactless with a credit or debit card, including Apple Pay and Google Pay, but only for one person per card or device",
+          "If you are not in Christchurch, Motu Move cards can be ordered online for $10 per card, with a minimum top-up of $5",
+          "All Motu Move payment options support fare caps and up to two free transfers within a 2-hour period",
+        ],
+      },
+      {
+        note: "Christchurch Airport states that Metrocards and cash are still accepted on Metro services but will be retired on 23 November 2026. From that date, you will no longer be able to use a Metrocard or cash to pay Metro fares.",
+      },
+      { h2: "Queenstown: Orbus and the Bee Card" },
+      {
+        ul: [
+          "The Orbus network is operated by the Otago Regional Council",
+          "A registered Bee Card offers the lowest fares; cash is also accepted on board",
+          "Unregistered cards are charged the adult fare",
+          "Buy a Bee Card online, at the PaperPlus store in the airport terminal, or at the Otago Regional Council office in Frankton during business hours",
+          "One free transfer is available when changing buses within 45 minutes using the same Bee Card",
+        ],
+      },
+      { h2: "Between the islands and by rail" },
+      {
+        p: "KiwiRail's Great Journeys New Zealand runs the Interislander ferry across Cook Strait between Wellington and Picton — a 93-kilometre (58-mile) crossing that takes three and a half hours — and three rail routes: the Northern Explorer (Auckland–Wellington), the TranzAlpine (Christchurch–Greymouth) and the Coastal Pacific (Christchurch–Picton).",
+      },
+      {
+        note: "Fares, timetables and service changes are published by each operator. Check the operator's own page for the day you travel.",
+      },
+      { source: { label: "Auckland Transport — Airport services", url: "https://at.govt.nz/bus-train-ferry/bus-services/airport-services" } },
+      { source: { label: "Auckland Transport — Buy an AT HOP card", url: "https://at.govt.nz/bus-train-ferry/at-hop-card/buy-at-hop-card" } },
+      { source: { label: "Auckland Transport — Using contactless payments", url: "https://at.govt.nz/bus-train-ferry/contactless-payments/using-contactless-payments-on-auckland-public-transport" } },
+      { source: { label: "Auckland Transport — 7-day fare cap", url: "https://at.govt.nz/bus-train-ferry/at-hop-card/7-day-fare-cap-for-auckland-public-transport" } },
+      { source: { label: "Auckland Transport — Visitors' guide to public transport", url: "https://at.govt.nz/bus-train-ferry/visitors-guide-to-public-transport-in-auckland" } },
+      { source: { label: "Metlink — Airport Express", url: "https://www.metlink.org.nz/getting-started/airport-express" } },
+      { source: { label: "Christchurch Airport — Public transport", url: "https://www.christchurchairport.co.nz/travellers/parking-and-transport/public-transport/" } },
+      { source: { label: "Queenstown Airport — Public bus transport", url: "https://www.queenstownairport.co.nz/parking-transport/transport-options/public-bus-transport/" } },
+      { source: { label: "Great Journeys New Zealand — Interislander Cook Strait crossing", url: "https://www.greatjourneysnz.com/routes/interislander-cook-strait-crossing/" } },
+      { source: { label: "Great Journeys New Zealand", url: "https://www.greatjourneysnz.com/" } },
+    ],
+  },
 ];
 
-export const PRACTICAL_PAGES: Page[] = RAW.map((p) => ({ ...p, checked: CHECKED }));
+export const PRACTICAL_PAGES: Page[] = RAW.map((p) => ({ ...p, checked: p.checked ?? CHECKED }));
 
 /** ハブ: 入国後の実用ページ＋既存の入国関連ページをまとめる（トップの一覧とは別の入口） */
 export const HUB_PAGE: Page = {
